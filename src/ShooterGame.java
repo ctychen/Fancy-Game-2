@@ -27,7 +27,7 @@ public class ShooterGame {
 	//time
 	private int time;
 	//score and difficulty, what they sound like
-	public static int difficulty, score = 0;
+	public int difficulty, score = 0;
 
 	// Constructor:
 	public ShooterGame(int t, Player s, int w, int h) {
@@ -548,4 +548,3 @@ public class ShooterGame {
 	}
 
 }
-//Line 547. Dang, that's a lot of code ;)

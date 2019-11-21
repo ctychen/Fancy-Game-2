@@ -29,11 +29,9 @@ public class ShooterGraphics extends JPanel implements ActionListener, KeyListen
 	private ShooterGame game;
 	private ProgressBar healthBar;
 	//Images:
-	//private Image explosion = new ImageIcon("explosion.gif").getImage();
 	private Image start = new ImageIcon("startscreen.png").getImage();
 	private Image instructions = new ImageIcon("instructions.PNG").getImage();
 	private Image endscreen = new ImageIcon("endscreen.png").getImage();
-	//private Image fancyColors = new ImageIcon("fancyColors.gif").getImage();
 	private Image playerImage = new ImageIcon("vi.png").getImage();
 	private Image enemyImage = new ImageIcon("ei.png").getImage();
 	private Image choose = new ImageIcon("choose.png").getImage();
@@ -88,7 +86,7 @@ public class ShooterGraphics extends JPanel implements ActionListener, KeyListen
 		ship = new Player();
 		panel = new SidePanel();
 		game = new ShooterGame(time, ship, 600, 400);
-		/* Timer */ clock = new Timer(10, (ActionListener) this);
+		clock = new Timer(10, (ActionListener) this);
 		clock.start();
 
 		KeyListener listener = new KeyListener() {
@@ -187,26 +185,26 @@ public class ShooterGraphics extends JPanel implements ActionListener, KeyListen
 			if (loops > 1500) iKey = false;
 		}
 		if (gameStart == true
-				&& (ShooterGame.difficulty != 1 || ShooterGame.difficulty != 2 || ShooterGame.difficulty != 3)) {
+				&& (game.difficulty != 1 || game.difficulty != 2 || game.difficulty != 3)) {
 			g.drawImage(choose, 0, 0, null);
 			if (key1 == true && choiceMade == false) {
-				ShooterGame.difficulty = 1;
+				game.difficulty = 1;
 				choiceMade = true;
 			} else if (key2 == true && choiceMade == false) {
-				ShooterGame.difficulty = 2;
+				game.difficulty = 2;
 				choiceMade = true;
 			} else if (key3 == true && choiceMade == false) {
-				ShooterGame.difficulty = 3;
+				game.difficulty = 3;
 				choiceMade = true;
 			} else if (gKey == true && choiceMade == false) {
-				ShooterGame.difficulty = 27;
+				game.difficulty = 27;
 				choiceMade = true;
 			}
 		}
-		if (ShooterGame.difficulty >= 1 && gameStart == true) {
+		if (game.difficulty >= 1 && gameStart == true) {
 			if(game.difficulty<26)//for lower difficulty background
 			{
-				Color bgc = new Color((30*ShooterGame.difficulty)%255, (255-10*ShooterGame.difficulty)%255, 100);
+				Color bgc = new Color((30*game.difficulty)%255, (255-10*game.difficulty)%255, 100);
 				g.setColor(bgc);
 				g.fillRect(0, 0, 1000, 500);
 			}
@@ -379,7 +377,7 @@ int degrees=45 - (int)(45 * Math.cos(0.016* Math.PI * time));
 			//updates side panel
 			if(ship.getHP()>0)
 			{
-				panel.update(ship.getHP(), ShooterGame.score, ShooterGame.difficulty);
+				panel.update(ship.getHP(), game.score, game.difficulty);
 			}
 			//game methods called to update various statuses
 			game.moveEnemies();
@@ -406,7 +404,6 @@ int degrees=45 - (int)(45 * Math.cos(0.016* Math.PI * time));
 			g.setColor(Color.BLACK);
 			//draws Ship
 			if (game.getShipStatus() == 0) {
-				// g.fillPolygon(ship);
 				if(ship.shieldHP>5)
 				{
 					g.setColor(Color.YELLOW);
@@ -426,16 +423,14 @@ int degrees=45 - (int)(45 * Math.cos(0.016* Math.PI * time));
 				if ((int) (Math.random() * 20.0) == 1)
 					ship.damaged = false;
 			} else if (game.getShipStatus() == 1) {
-				//g.drawImage(explosion, ship.x - 100, ship.y - 100, null);
 				if (lowGraphics == 2) {g.setColor(Color.RED); g.fillOval(ship.x-100, ship.y-100, 200, 200); g.setColor(Color.BLACK); }
 			} else if (ship.getCount() > 160) {
 				g.drawImage(endscreen, 0, 0, null);
 				if (fKey == true) {
-					scores[0 + timesRestarted] = ShooterGame.score;
+					scores[0 + timesRestarted] = game.score;
 					clock.stop();
 					if (checkHighScore() == true)
-						System.out.println("Congrats, new high score!/n You got " + ShooterGame.score);
-					this.setVisible(false); // you can't see me!
+						System.out.println("Congrats, new high score!/n You got " + game.score);
 					this.restartGame(g);
 				}
 			}
@@ -470,7 +465,6 @@ int degrees=45 - (int)(45 * Math.cos(0.016* Math.PI * time));
 				} else {
 					if (eList.get(i).getCount() < 60) {
 						if (lowGraphics == 2) {g.setColor(Color.RED); g.fillOval((eList.get(i)).x - 75,  (eList.get(i)).y - 75, 150, 150); g.setColor(Color.BLACK);}
-						//g.drawImage(explosion, (eList.get(i)).x - 100, (eList.get(i)).y - 100, null);
 						eList.get(i).incrementCount();
 					}
 				}
@@ -482,9 +476,7 @@ int degrees=45 - (int)(45 * Math.cos(0.016* Math.PI * time));
 				} else {
 					if (oList.get(i).getCount() < 60) {
 						if (lowGraphics == 2) {g.setColor(Color.RED); g.fillOval((oList.get(i)).x - 75,  (oList.get(i)).y - 75, 150, 150); g.setColor(Color.BLACK);}
-						//g.drawImage(explosion, (oList.get(i)).x - 100, (oList.get(i)).y - 100, null);
 						oList.get(i).incrementCount();
-						// System.out.println(oList.get(i).getCount());
 					}
 				}
 			}
@@ -523,11 +515,7 @@ int degrees=45 - (int)(45 * Math.cos(0.016* Math.PI * time));
 			//draws Health bar and corresponding label
 			healthBar.set(ship.getHP());
 			healthBar.draw(g);
-			//panel.setLayout(null);
-			//JLabel hpLabel= new JLabel("HP re m a i n i n g:");
 			add(hpLabel);
-			//hpLabel.setLocation(20, 3);
-			//hpLabel.setSize(120, 20);
 		}
 		if(lowGraphics == 1) g.drawImage(rg, 450, 10, this);
 		if (lowGraphics == 2) g.drawImage(lg, 420, -25, null);
@@ -544,19 +532,32 @@ int degrees=45 - (int)(45 * Math.cos(0.016* Math.PI * time));
 		}
 		gameStart = false;
 		fKey = false;
-		ShooterGame.difficulty = 0;
-		ShooterGame.score = 0;
-		GameWindow newGame = new GameWindow();
-		GameWindow.main(null);
+		reinit();
+	}
+	
+	public void reinit() {
+		gameStart = false;
+		choiceMade = false;
+		booms = new ArrayList<Explosion>();
+		healthBar = new ProgressBar(10, 100, 10, 20, 20, 5, Color.ORANGE, Color.BLACK);
+		this.setLayout(null);
+		hpLabel= new JLabel("HP re m a i n i n g:");
+		hpLabel.setLocation(20, 3);
+		hpLabel.setSize(120, 20);
+		time = 0;
+		time2 = 5;
+		ship = new Player();
+		//panel = new SidePanel();
+		game = new ShooterGame(time, ship, 600, 400);
+		clock.start();
 	}
 	//for highscore functions
 	public boolean checkHighScore() {
-		boolean isGreatest = true;
 		for (int i = 0; i < scores.length; i++) {
-			if (scores[i] < ShooterGame.score)
+			if (scores[i] < game.score)
 				return false;
 		}
-		return isGreatest;
+		return true;
 	}
 	//override methods
 	@Override
@@ -583,13 +584,14 @@ int degrees=45 - (int)(45 * Math.cos(0.016* Math.PI * time));
 		time++;
 		game.incrementTime();
 		repaint();
-		if (gameStart == true && choiceMade == true) moveStuff();
+		if (gameStart == true && choiceMade == true&&ship.getHP()>0) moveStuff();
 		if ((int) (Math.random() * 1200) == 1&&ship.getHP()>0 && gameStart == true && choiceMade == true) {
-			ShooterGame.difficulty++;
-			ShooterGame.score += 150 * ShooterGame.difficulty;
+			game.difficulty++;
+			game.score += 150 * game.difficulty;
 		}
 		if (time % 10 == 0&&ship.getHP()>0 && gameStart == true && choiceMade == true) {
-			ShooterGame.score++;
+			game.score++;
+			System.out.println(time);
 		}
 	}
 	//for moving the player

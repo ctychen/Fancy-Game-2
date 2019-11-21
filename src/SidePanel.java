@@ -23,7 +23,6 @@ public class SidePanel extends JPanel{
 		points=0;
 		diff=1;
 		hpBar = new ProgressBar(10, 80, 10, 620, 20, 5, Color.GREEN, Color.BLACK);
-		//add(new JLabel("HP left:"));
 		add(hpBar);
 		add(new JLabel("Score:"));
 		score = new JTextField(points);

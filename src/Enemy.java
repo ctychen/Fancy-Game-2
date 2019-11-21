@@ -16,17 +16,14 @@ public class Enemy extends Shooter{
 		super.addPoint(x-5, y);
 		super.addPoint(x+5, y);
 		super.addPoint(x+5, y-8);
-		//super.addPoint(x+8, y+20);
 		super.addPoint(x+30, y-30);
 		super.addPoint(x-30, y-30);
-		//super.addPoint(x-8, y+20);
 		super.addPoint(x-5, y-8);
 		
 	}
 	//Creates and returns a projectile
 	public Projectile shoot()
 	{
-		//System.out.print("*");
 		return new Projectile(x,y,-1);
 	}
 	//Drifts Right and Left respectively at a slow pace
