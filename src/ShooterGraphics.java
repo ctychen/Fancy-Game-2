@@ -598,7 +598,7 @@ int degrees=45 - (int)(45 * Math.cos(0.016* Math.PI * time));
 		}
 		if (time % 10 == 0&&ship.getHP()>0 && gameStart == true && choiceMade == true) {
 			game.score++;
-			System.out.println(time);
+			//System.out.println(time);
 		}
 	}
 	//for moving the player

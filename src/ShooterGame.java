@@ -67,7 +67,11 @@ public class ShooterGame {
 
 		for (int i = 0; i < enemies.size(); i++) {
 			int x = enemies.get(i).getHP();
-			if (x <= 0) {
+			if(enemies.get(i).y>height+20) {
+				enemies.remove(i);
+				i--;
+			}
+			else if (x <= 0) {
 				if (!this.explodingStatus(enemies.get(i))) {
 					if((int)(Math.random()*4)==0)
 					{
@@ -79,7 +83,6 @@ public class ShooterGame {
 					i--;
 				}
 			}
-
 		}
 	}
 
@@ -267,7 +270,7 @@ public class ShooterGame {
 	public void enemyShot() {
 		for (int i = 0; i < enemies.size(); i++) {
 			Enemy enemy = (enemies.get(i));
-			if (time % 160 == 0 && enemy.getHP() > 0) {
+			if (enemy.timeToShoot()) {
 				Projectile p = enemy.shoot();
 				enemyProjectiles.add(p);
 
@@ -372,23 +375,11 @@ public class ShooterGame {
 		for (int i = 0; i < enemies.size(); i++) {
 
 			Enemy enemy = enemies.get(i);
-			if (enemy.getDriftDir()&&enemy.getHP()>0) {
-				if (enemy.x + 40 >= width) {
-					enemy.setDir(false);
-					// System.out.println("RSwitch");
-				} else {
-					enemy.driftRight();
-					// System.out.println("R");
-				}
-			} else if (!enemy.getDriftDir()&&enemy.getHP()>0) {
-				if (enemy.x - 40 <= 0) {
-					enemy.setDir(true);
-					// System.out.println("LSwitch");
-				} else {
-					enemy.driftLeft();
-					// System.out.println("L");
-				}
+			if(enemy.x<=0||enemy.x>=width)
+			{
+				enemy.setDir(!enemy.getDriftDir());
 			}
+			enemy.act();
 		}
 	}
 

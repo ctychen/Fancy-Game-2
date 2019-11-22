@@ -8,6 +8,7 @@ import java.util.Random;
 public class Enemy extends Shooter{
 	//Fields:
 	private boolean driftDir, blownUp=false, crit=false;
+	private int shootCount;
 	//Constructor:
 	public Enemy(int x, int y, int k)
 	{
@@ -19,12 +20,37 @@ public class Enemy extends Shooter{
 		super.addPoint(x+30, y-30);
 		super.addPoint(x-30, y-30);
 		super.addPoint(x-5, y-8);
+		shootCount=160;
 		
+	}
+	//returns true if it's time for the enemy to shoot
+	public boolean timeToShoot() {
+		if(shootCount<=0) {
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 	//Creates and returns a projectile
 	public Projectile shoot()
 	{
+		shootCount=160;
 		return new Projectile(x,y,-1);
+	}
+	//determines enemy movement
+	public void act() {
+		if (driftDir&&hp>0) {		
+			driftRight();
+		} else if (hp>0) {
+			driftLeft();
+		}
+		if((int)(Math.random()*10)==0)
+		{
+			driftDown();
+		}
+		shootCount--;
 	}
 	//Drifts Right and Left respectively at a slow pace
 	public void driftRight()
@@ -36,6 +62,11 @@ public class Enemy extends Shooter{
 	{
 			super.translate(-1,0);
 			super.x--;
+	}
+	//Drifts downwards small amounts randomly
+	public void driftDown() {
+		super.translate(0, 1);
+		super.y++;
 	}
 	//Returns and sets the direction of drift respectively
 	public boolean getDriftDir()
@@ -54,9 +85,11 @@ public class Enemy extends Shooter{
 		blownUp = true;
 		hp = 0;
 	}
+	//changes boolean indicating whether it died by critical hit
 	public void crit() {
 		crit=true;
 	}
+	//returns whether it died by critical hit
 	public boolean critStatus() {
 		return crit;
 	}
