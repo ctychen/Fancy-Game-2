@@ -135,7 +135,7 @@ public class ShooterGame {
 				playerProjectiles.remove(i);
 				i--;
 			} else if (this.hitEnemy(p) || this.hitBoost(p)) {
-				p.collide();
+				//p.collide();
 
 			} else {
 
@@ -195,8 +195,15 @@ public class ShooterGame {
 	public boolean hitEnemy(Projectile p) {
 		for (int i = 0; i < enemies.size(); i++) {
 			if (enemies.get(i).contains(p.getX(), p.getY())) {
-
-				enemies.get(i).damage();
+				if(enemies.get(i).x-p.getX()<2&&enemies.get(i).x-p.getX()>-2)
+				{
+					enemies.get(i).explode();
+					enemies.get(i).crit();
+				}
+				else
+				{
+					enemies.get(i).damage();
+				}
 				p.collide();
 				return true;
 			} else {
@@ -324,38 +331,38 @@ public class ShooterGame {
 
 	// makes new obstacles
 	public void generateObstacle() {
-		int xC = (int) (Math.random() * width);
-		int yC = -50;
-		int dx = (int) (Math.random() * 3);
-		int dy = (int) (Math.random() * 4) + 1;
-		int type = (int) (Math.random() * 3);
-		if ((time % 7) % 2 == 1 && type != 1) {
-			dx *= -1;
-			xC += 150;
-		}
-		Obstacle newObs = new Obstacle(xC, yC, dx, dy, type);
 		if ((int) (Math.random() * 1200 / (difficulty + 1)) == 10) {
+			int xC = (int) (Math.random() * width);
+			int yC = -50;
+			int dx = (int) (Math.random() * 3);
+			int dy = (int) (Math.random() * 4) + 1;
+			int type = (int) (Math.random() * 3);
+			if ((time % 7) % 2 == 1 && type != 1) {
+				dx *= -1;
+				xC += 150;
+			}
+			Obstacle newObs = new Obstacle(xC, yC, dx, dy, type);
 			obstacles.add(newObs);
 		}
 	}
 
 	// makes boosts
 	public void generateBoost() {
-		int x = (int) (300);
-		int y = (int) (Math.random() * 100) + 20;
-		Boost newBoost = new Boost(x, y);
 		if ((int) (Math.random() * 1200 / (difficulty + 1)) == 10) {
+			int x = (int) (300);
+			int y = (int) (Math.random() * 100) + 20;
+			Boost newBoost = new Boost(x, y);
 			boosts.add(newBoost);
 		}
 	}
 
 	// makes new enemies
 	public void generateEnemy() {
-		int x = (int) (300);
-		int y = (int) (Math.random() * 100) + 20;
-		int k = (int) (Math.random() * 10) + 1;
-		Enemy newEnemy = new Enemy(x, y, k);
 		if ((int) (Math.random() * 2000 / (difficulty + 1)) == 10) {
+			int x = (int) (Math.random() * 300) + 150;
+			int y = (int) (Math.random() * 100) + 20;
+			int k = (int) (Math.random() * 10) + 1;
+			Enemy newEnemy = new Enemy(x, y, k);
 			enemies.add(newEnemy);
 		}
 	}
@@ -365,7 +372,7 @@ public class ShooterGame {
 		for (int i = 0; i < enemies.size(); i++) {
 
 			Enemy enemy = enemies.get(i);
-			if (enemy.getDriftDir()) {
+			if (enemy.getDriftDir()&&enemy.getHP()>0) {
 				if (enemy.x + 40 >= width) {
 					enemy.setDir(false);
 					// System.out.println("RSwitch");
@@ -373,7 +380,7 @@ public class ShooterGame {
 					enemy.driftRight();
 					// System.out.println("R");
 				}
-			} else if (!enemy.getDriftDir()) {
+			} else if (!enemy.getDriftDir()&&enemy.getHP()>0) {
 				if (enemy.x - 40 <= 0) {
 					enemy.setDir(true);
 					// System.out.println("LSwitch");

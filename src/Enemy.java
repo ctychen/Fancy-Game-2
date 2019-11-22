@@ -7,7 +7,7 @@ import java.util.Random;
 //Represents an enemy
 public class Enemy extends Shooter{
 	//Fields:
-	private boolean driftDir, blownUp=false;
+	private boolean driftDir, blownUp=false, crit=false;
 	//Constructor:
 	public Enemy(int x, int y, int k)
 	{
@@ -53,5 +53,11 @@ public class Enemy extends Shooter{
 		if (blownUp == false) ShooterGraphics.booms.add(new Explosion((int)(Math.random()*10), x, y));
 		blownUp = true;
 		hp = 0;
+	}
+	public void crit() {
+		crit=true;
+	}
+	public boolean critStatus() {
+		return crit;
 	}
 }

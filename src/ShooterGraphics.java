@@ -41,6 +41,7 @@ public class ShooterGraphics extends JPanel implements ActionListener, KeyListen
 	private Image spark = new ImageIcon("Spark.gif").getImage();
 	private Image lg = new ImageIcon("LowGraphics.png").getImage();
 	private Image rg = new ImageIcon("reducedGraphics.png").getImage();
+	private Image critImg = new ImageIcon("crit.png").getImage();
 	Timer clock;
 	int timesRestarted = 0;
 	SidePanel panel;
@@ -185,7 +186,7 @@ public class ShooterGraphics extends JPanel implements ActionListener, KeyListen
 			if (loops > 1500) iKey = false;
 		}
 		if (gameStart == true
-				&& (game.difficulty != 1 || game.difficulty != 2 || game.difficulty != 3)) {
+				&& !choiceMade) {
 			g.drawImage(choose, 0, 0, null);
 			if (key1 == true && choiceMade == false) {
 				game.difficulty = 1;
@@ -467,6 +468,9 @@ int degrees=45 - (int)(45 * Math.cos(0.016* Math.PI * time));
 						if (lowGraphics == 2) {g.setColor(Color.RED); g.fillOval((eList.get(i)).x - 75,  (eList.get(i)).y - 75, 150, 150); g.setColor(Color.BLACK);}
 						eList.get(i).incrementCount();
 					}
+					if (eList.get(i).getCount() < 60&&eList.get(i).critStatus()) {
+						g.drawImage(critImg,eList.get(i).x-50,eList.get(i).y-10,null);
+					}
 				}
 			}
 			//draws obstacles
@@ -536,8 +540,6 @@ int degrees=45 - (int)(45 * Math.cos(0.016* Math.PI * time));
 	}
 	
 	public void reinit() {
-		gameStart = false;
-		choiceMade = false;
 		booms = new ArrayList<Explosion>();
 		healthBar = new ProgressBar(10, 100, 10, 20, 20, 5, Color.ORANGE, Color.BLACK);
 		this.setLayout(null);
@@ -547,8 +549,13 @@ int degrees=45 - (int)(45 * Math.cos(0.016* Math.PI * time));
 		time = 0;
 		time2 = 5;
 		ship = new Player();
-		//panel = new SidePanel();
 		game = new ShooterGame(time, ship, 600, 400);
+		gameStart = false;
+		choiceMade = false;
+		key1=false;
+		key2=false;
+		key3=false;
+		gKey=false;
 		clock.start();
 	}
 	//for highscore functions
