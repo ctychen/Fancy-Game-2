@@ -9,6 +9,7 @@ import java.lang.reflect.Array;
 public class Projectile extends Polygon{
 //Fields:
 	public int xC,yC,v;//center coords and velocity
+	private int power;
 	private boolean spent;
 //Constructor:
 	public Projectile(int x,int y, int k)
@@ -22,6 +23,20 @@ public class Projectile extends Polygon{
 		yC=y;
 		v=k;
 		spent=false;
+		power=0;
+	}
+	public Projectile(int x,int y, int k, int atk)
+	{
+		super();
+		super.addPoint(x-5, y);
+		super.addPoint(x+5, y);
+		super.addPoint(x+5, y+10);
+		super.addPoint(x-5, y+10);
+		xC=x;
+		yC=y;
+		v=k;
+		spent=false;
+		power=atk;
 	}
 //Returns the x and y centers
 	public int getX()
@@ -52,5 +67,8 @@ public class Projectile extends Polygon{
 	public void draw(Graphics g)
 	{
 		g.fillPolygon(this);
+	}
+	public int getPower() {
+		return power;
 	}
 }

@@ -23,6 +23,19 @@ public class Enemy extends Shooter{
 		shootCount=160;
 		
 	}
+	public Enemy(int x, int y, int k,int attack, int defense)
+	{
+		super(x,y,k,attack,defense);
+		driftDir=new Random().nextBoolean();
+		super.addPoint(x-5, y);
+		super.addPoint(x+5, y);
+		super.addPoint(x+5, y-8);
+		super.addPoint(x+30, y-30);
+		super.addPoint(x-30, y-30);
+		super.addPoint(x-5, y-8);
+		shootCount=160;
+		
+	}
 	//returns true if it's time for the enemy to shoot
 	public boolean timeToShoot() {
 		if(shootCount<=0) {

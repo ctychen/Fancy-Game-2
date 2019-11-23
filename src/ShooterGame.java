@@ -160,7 +160,7 @@ public class ShooterGame {
 				else
 				{
 					(enemyProjectiles.get(i)).collide();
-					ship.damage();
+					ship.damage(enemyProjectiles.get(i).getPower(),ship.def);
 				}
 			}
 			if (enemyProjectiles.get(i).collisionStatus()||enemyProjectiles.get(i).getY()>550) {
@@ -205,7 +205,7 @@ public class ShooterGame {
 				}
 				else
 				{
-					enemies.get(i).damage();
+					enemies.get(i).damage(p.getPower(),enemies.get(i).def);
 				}
 				p.collide();
 				return true;

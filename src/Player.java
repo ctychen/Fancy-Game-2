@@ -12,7 +12,7 @@ public class Player extends Shooter{
 	//Constructor:
 	public Player()
 	{
-		super(300,300);
+		super(300,300,20,10,10);
 		super.addPoint(x-5, y);
 		super.addPoint(x+5, y);
 		super.addPoint(x+5, y+20);
@@ -39,7 +39,7 @@ public class Player extends Shooter{
 //returns a projectile
 	public Projectile shoot(int xC)
 	{
-		return new Projectile(xC,y,3);
+		return new Projectile(xC,y,3,atk);
 	}
 //sets the booleans for powerups, changes the counts, or starts the counts. See powerUp for more info on what each powerUp does.
 	public void setTS()

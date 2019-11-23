@@ -11,7 +11,7 @@ import javax.swing.JFrame;
 public class Shooter extends Polygon{
 //Fields:
 	int x,y;
-	int hp;
+	int hp,atk,def;
 	boolean blownUp;
 	private int explosionCount;
 	boolean damaged = false;
@@ -20,6 +20,8 @@ public class Shooter extends Polygon{
 	public Shooter(int xCoord,int yCoord)
 	{
 		hp=10;
+		atk=0;
+		def=0;
 		x=xCoord;
 		y=yCoord;
 		blownUp=false;
@@ -30,13 +32,23 @@ public class Shooter extends Polygon{
 	public Shooter(int xCoord,int yCoord, int k)
 	{
 		hp=k;
+		atk=0;
+		def=0;
 		x=xCoord;
 		y=yCoord;
 		blownUp=false;
 		explosionCount=0;
 		
 	}
-	
+	public Shooter(int xCoord, int yCoord, int k, int attack, int defense) {
+		hp=k;
+		atk=attack;
+		def=defense;
+		x=xCoord;
+		y=yCoord;
+		blownUp=false;
+		explosionCount=0;
+	}
 //	public void draw(Graphics g)
 //	{
 //		g.setColor(Color.BLUE);
@@ -46,7 +58,7 @@ public class Shooter extends Polygon{
 	//because I really don't want to break anything
 	public Projectile shoot()
 	{
-		return new Projectile(x,y,3);
+		return new Projectile(x,y,3,atk);
 	}
 	//moves the shooter, used for default player movements
 	public void moveLeft()
@@ -98,6 +110,23 @@ public class Shooter extends Polygon{
 		if(hp<=0)
 		{
 			explode();
+		}
+	}
+	public void damage(int attack, int defense){
+		int dmg=0;
+		if(attack<defense) {
+			
+		}
+		else
+		{
+			dmg=attack-defense+1;
+		}
+		if(dmg>hp) {
+			explode();
+		}
+		else
+		{
+			hp-=dmg;
 		}
 	}
 	//blows up the player instantly
