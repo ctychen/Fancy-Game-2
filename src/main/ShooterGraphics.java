@@ -407,7 +407,7 @@ int degrees=45 - (int)(45 * Math.cos(0.016* Math.PI * time));
 			//updates side panel
 			if(ship.getHP()>0)
 			{
-				panel.update(ship.getHP(), game.score, game.getWaveNum());
+				panel.update(ship.getHP(), game.score, game.getWaveNum(),game.getCurrency());
 			}
 			//game methods called to update various statuses
 			game.moveEnemies();

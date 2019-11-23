@@ -12,18 +12,18 @@ import javax.swing.border.*;
 //Is the panel on the side that shows score and difficulty
 public class SidePanel extends JPanel{
 //Fields:
-	private JTextField difficulty,score;
-	private int points,diff;
+	private JTextField difficulty,score, currency;
+	private int points,diff,curr;
 	ProgressBar hpBar;
 //Constructor:
 	public SidePanel()
 	{
-		super(new GridLayout(5,1,0,20));
+		super(new GridLayout(8,1,0,15));
 		this.setBackground(Color.GRAY);
 		Font displayFont = new Font("Monospaced", Font.BOLD, 16);
 		points=0;
 		diff=1;
-		hpBar = new ProgressBar(10, 80, 10, 620, 20, 5, Color.GREEN, Color.BLACK);
+		hpBar = new ProgressBar(20, 80, 10, 620, 20, 5, Color.GREEN, Color.BLACK);
 		add(hpBar);
 		add(new JLabel("Score:"));
 		score = new JTextField(points);
@@ -38,13 +38,21 @@ public class SidePanel extends JPanel{
 	    difficulty.setEditable(false);
 	    difficulty.setBackground(Color.WHITE);
 	    add(difficulty);
+	    
+	    add(new JLabel("Currency:"));
+		currency = new JTextField(curr);
+		currency.setFont(displayFont);
+		currency.setEditable(false);
+		currency.setBackground(Color.WHITE);
+	    add(currency);
 	}
 //Updates the panel's text fields to be the latest
-	public void update(int hp, int s, int d)
+	public void update(int hp, int s, int d,int c)
 	{
 		hpBar.set(hp);
 		points=s;
 		diff=d;
+		curr=c;
 		if(s<100000)
 		{
 			score.setText(String.valueOf(points));
@@ -58,6 +66,7 @@ public class SidePanel extends JPanel{
 			score.setText("GOD");
 		}
 		difficulty.setText(String.valueOf(diff));
+		currency.setText(String.valueOf(curr));
 	}
 	//draws it
 	public void paintComponent(Graphics g)
