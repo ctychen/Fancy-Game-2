@@ -53,7 +53,7 @@ public class ShooterGame {
 		enemyProjectiles = new ArrayList<Projectile>();
 		powerUps=new ArrayList<PowerUp>();
 		Enemy e=new Enemy(300,60,30);
-		currentWave=new Wave(10,5,e);
+		currentWave=new Wave(10,5,e, waveNum);
 	}
 
 	// Returns 0 for alive, 1 for exploding, 2 for dead
@@ -596,7 +596,7 @@ public class ShooterGame {
 		return waveNum;
 	}
 	public void nextWave() {
-		currentWave = new Wave(10+waveNum,5+waveNum,new Enemy(300,60,30+waveNum/5));
+		currentWave = new Wave(10+waveNum,5+waveNum,new Enemy(300,60,30+waveNum/5), waveNum+1);
 		waveNum++;
 		score+=waveNum*1000;
 		waveDone=false;

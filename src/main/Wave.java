@@ -1,17 +1,21 @@
 package main;
 
+import enemies.Ninja;
+
 public class Wave {
 	private Enemy[] enemyList;
 	private Enemy boss;
 	private Obstacle[] obstacleList;
 	private int maxEnemies, obsDelay;
 	
-	public Wave(int enemyNum, int obsNum, Enemy bossEnemy) {
+	public Wave(int enemyNum, int obsNum, Enemy bossEnemy, int waveNum) {
 		enemyList = new Enemy[enemyNum];
 		obstacleList = new Obstacle[obsNum];
 		for(int i=0;i<enemyNum;i++) {
-			if ()
-			enemyList[i]= new Enemy(300,80,10);
+			if (waveNum > Ninja.minDif && (int)(Math.random()*Ninja.nMod) == 0)
+				enemyList[i] = new Ninja(300,81,10);
+			else
+				enemyList[i]= new Enemy(300,80,10);
 		}
 		for(int i=0;i<obsNum;i++) {
 			int xC = (int) (Math.random() * 600);
