@@ -32,7 +32,7 @@ public class SidePanel extends JPanel{
 	    score.setBackground(Color.WHITE);
 	    add(score);
 	    
-	    add(new JLabel("Difficulty:"));
+	    add(new JLabel("On Wave:"));
 		difficulty = new JTextField(diff);
 	    difficulty.setFont(displayFont);
 	    difficulty.setEditable(false);
