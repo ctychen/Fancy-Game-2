@@ -10,7 +10,7 @@ import java.awt.Graphics;
 //Represents an enemy
 public class Enemy extends Shooter{
 	//Fields:
-	protected boolean driftDir, blownUp=false, crit=false;
+	protected boolean driftDir, blownUp=false, crit=false, driftDirVert;
 	protected int shootCount;
 	protected int speed = 1;
 	protected java.awt.Image image = ShooterGraphics.enemyImage;

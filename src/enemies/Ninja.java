@@ -46,21 +46,31 @@ public class Ninja extends main.Enemy {
 	//determines enemy movement
 	public void act() {
 		spookyCheckBounds();
+		if ((int)(Math.random()*10)==0) {
+			speed = Math.max(Math.min(speed+(int)(Math.random()*3)-1, 6), 1);
+		}
 		if (driftDir&&hp>0) {		
 			driftRight();
 		} else if (hp>0) {
 			driftLeft();
 		}
-		if((int)(Math.random()*10)==0)
-		{
-			driftDown();
-		}
-		else if((int)(Math.random()*20)==0)
-		{
+		if (driftDirVert&&hp>0) {		
 			driftUp();
+		}
+		else if (hp>0) {		
+			driftDown();
 		}
 		if((int)(Math.random()*30)==0) {
 			driftDir=new Random().nextBoolean();
+		}
+		if((int)(Math.random()*20)==0) {
+			driftDirVert=new Random().nextBoolean();
+		}
+		if (y > 400) {
+			driftDirVert = true;
+		}
+		else if (y < 50) {
+			driftDirVert = false;
 		}
 		shootCount--;
 	}
