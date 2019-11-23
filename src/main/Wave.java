@@ -1,5 +1,6 @@
 package main;
 
+import enemies.Boss0;
 import enemies.Ninja;
 
 public class Wave {
@@ -28,7 +29,7 @@ public class Wave {
 		}
 		maxEnemies=20;
 		obsDelay=500;
-		this.boss=bossEnemy;
+		this.boss = new Boss0(15+(int)(Math.random()*600),70-(int)(Math.random()*20),60+waveNum);
 	}
 	public Wave(int waveNum) {
 		

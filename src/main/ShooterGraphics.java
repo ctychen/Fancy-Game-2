@@ -36,6 +36,7 @@ public class ShooterGraphics extends JPanel implements ActionListener, KeyListen
 	private Image playerImage = new ImageIcon("vi.png").getImage();
 	public static Image enemyImage = new ImageIcon("ei.png").getImage();
 	public static Image ninjaImage = new ImageIcon("ni.png").getImage();
+	public static Image boss0Image = new ImageIcon("b0i.png").getImage();
 	private Image choose = new ImageIcon("choose.png").getImage();
 	private Image bg1 = new ImageIcon("bkgd1.png").getImage();
 	private Image bg2 = new ImageIcon("bkgd2.png").getImage();
@@ -222,7 +223,7 @@ public class ShooterGraphics extends JPanel implements ActionListener, KeyListen
 		if (game.getWaveStatus()) {
 			paused = true;
 		}
-		if (paused) { //Wave# = getWaveNum()/5
+		if (paused) { //# = getWaveNum()/5
 			rainbow(g, this.getWidth(), this.getHeight());
 			g.setFont(new java.awt.Font("serif", java.awt.Font.PLAIN, 30));
 			g.drawString("Congratulations", this.getWidth()/20, this.getHeight()/4);
