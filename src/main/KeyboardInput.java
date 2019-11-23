@@ -1,3 +1,4 @@
+package main;
 import java.lang.Object.*;
 
 public class KeyboardInput {
