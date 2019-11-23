@@ -88,11 +88,9 @@ public class ShooterGame {
 						//System.out.println("boi");
 					}
 					if ((int) (Math.random() * enemies.get(i).rMod) == 0&&ship.getHP()>0) {
-						score += 150 * waveNum;
+						score += 150 * (waveNum/5+1);
 					}
 					enemies.remove(i);
-					
-					score += 200;
 					i--;
 				}
 			}
@@ -127,7 +125,7 @@ public class ShooterGame {
 						//System.out.println("boi");
 					}
 					obstacles.remove(i);
-					score += 100;
+					score += 100*waveNum/10;
 					i--;
 				} 
 			}
@@ -600,6 +598,7 @@ public class ShooterGame {
 	public void nextWave() {
 		currentWave = new Wave(10+waveNum,5+waveNum,new Enemy(300,60,30+waveNum/5));
 		waveNum++;
+		score+=waveNum*1000;
 		waveDone=false;
 	}
 	public void setWaveNum(int x) {
