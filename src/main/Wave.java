@@ -13,9 +13,9 @@ public class Wave {
 		obstacleList = new Obstacle[obsNum];
 		for(int i=0;i<enemyNum;i++) {
 			if (waveNum > Ninja.minDif && (int)(Math.random()*Ninja.nMod) == 0)
-				enemyList[i] = new Ninja(300,81,5+waveNum/2);
+				enemyList[i] = new Ninja(15+(int)(Math.random()*600),70-(int)(Math.random()*20),5+waveNum/2);
 			else
-				enemyList[i]= new Enemy(300,80,10+waveNum/2);
+				enemyList[i]= new Enemy(15+(int)(Math.random()*600),70-(int)(Math.random()*20),10+waveNum/2);
 		}
 		for(int i=0;i<obsNum;i++) {
 			int xC = (int) (Math.random() * 600);
