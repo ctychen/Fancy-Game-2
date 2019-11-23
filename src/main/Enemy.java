@@ -5,12 +5,15 @@ package main;
 
 
 import java.util.Random;
+
+import java.awt.Graphics;
 //Represents an enemy
 public class Enemy extends Shooter{
 	//Fields:
 	protected boolean driftDir, blownUp=false, crit=false;
 	protected int shootCount;
 	protected int speed = 1;
+	protected java.awt.Image image = ShooterGraphics.enemyImage;
 	public int rMod = 3; // 1/rMod = the chance of increasing the difficulty by killing this, put 0 to guarrantee it
 	//Constructor:
 	public Enemy(int x, int y, int k)
@@ -29,6 +32,12 @@ public class Enemy extends Shooter{
 		shootCount=160;
 		
 	}
+	
+	public void draw(Graphics g) {
+		g.drawImage(image, x - 300, y - 220, null);
+	}
+	
+	
 	protected void shapeMe() {
 		super.addPoint(x-5, y);
 		super.addPoint(x+5, y);

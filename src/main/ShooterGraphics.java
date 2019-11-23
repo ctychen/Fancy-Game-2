@@ -34,7 +34,8 @@ public class ShooterGraphics extends JPanel implements ActionListener, KeyListen
 	private Image instructions = new ImageIcon("instructions.PNG").getImage();
 	private Image endscreen = new ImageIcon("endscreen.png").getImage();
 	private Image playerImage = new ImageIcon("vi.png").getImage();
-	private Image enemyImage = new ImageIcon("ei.png").getImage();
+	public static Image enemyImage = new ImageIcon("ei.png").getImage();
+	public static Image ninjaImage = new ImageIcon("ni.png").getImage();
 	private Image choose = new ImageIcon("choose.png").getImage();
 	private Image bg1 = new ImageIcon("bkgd1.png").getImage();
 	private Image bg2 = new ImageIcon("bkgd2.png").getImage();
@@ -483,7 +484,7 @@ int degrees=45 - (int)(45 * Math.cos(0.016* Math.PI * time));
 					// g.fillPolygon(eList.get(i));
 					if(ship.getHP()>0)
 					{
-						if (lowGraphics == 0||lowGraphics==1) g.drawImage(enemyImage, (eList.get(i)).x - 300, (eList.get(i)).y - 220, null);
+						if (lowGraphics == 0||lowGraphics==1) eList.get(i).draw(g);
 						else {g.setColor(new Color(100, 100, 0)); g.fillPolygon(eList.get(i)); g.setColor(Color.BLACK);}
 					}
 					if (eList.get(i).damaged == true)

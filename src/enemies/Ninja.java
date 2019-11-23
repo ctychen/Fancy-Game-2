@@ -5,6 +5,7 @@ import java.util.Random;
 import com.sun.prism.Graphics;
 
 import main.Projectile;
+import main.ShooterGraphics;
 
 public class Ninja extends main.Enemy {
 
@@ -14,24 +15,18 @@ public class Ninja extends main.Enemy {
 		super(x, y, k);
 		// TODO Auto-generated constructor stub
 		speed = 5;
+		image = ShooterGraphics.ninjaImage;
 	}
 	
 	public Ninja(int x, int y, int k,int attack, int defense) {
 		super(x, y, k, attack, defense);
 		speed = 5;
+		image = ShooterGraphics.ninjaImage;
 	}
 	
-	public void draw(Graphics g) {
-		g.drawImage(image, (eList.get(i)).x - 300, (eList.get(i)).y - 220, null);
-	}
 	
-	public void shapeMe() {/*
-		super.addPoint(x-5, y);
-		super.addPoint(x+5, y);
-		super.addPoint(x+5, y-8);
-		super.addPoint(x+20, y-8);
-		super.addPoint(x-20, y-8);
-		super.addPoint(x, y-30);*/
+	
+	public void shapeMe() {
 		super.addPoint(x-5, y);
 		super.addPoint(x+5, y);
 		super.addPoint(x+5, y-8);

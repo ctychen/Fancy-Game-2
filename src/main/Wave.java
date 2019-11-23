@@ -10,6 +10,7 @@ public class Wave {
 		enemyList = new Enemy[enemyNum];
 		obstacleList = new Obstacle[obsNum];
 		for(int i=0;i<enemyNum;i++) {
+			if ()
 			enemyList[i]= new Enemy(300,80,10);
 		}
 		for(int i=0;i<obsNum;i++) {
