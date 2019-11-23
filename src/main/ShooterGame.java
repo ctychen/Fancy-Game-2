@@ -285,8 +285,17 @@ public class ShooterGame {
 			Enemy enemy = (enemies.get(i));
 			if (enemy.timeToShoot()) {
 				for (int j = 0; j < enemy.bulletCount; j++) {
-					Projectile p = enemy.shoot();
-					enemyProjectiles.add(p);
+					if(enemy.getClass().toString().equals("class enemies.Boss0"))
+					{
+						enemyProjectiles.add(enemy.shoot());
+						enemyProjectiles.add(enemy.shoot(enemy.x-10));
+					}
+					else
+					{
+						//System.out.println(enemy.getClass().toString());
+						Projectile p = enemy.shoot();
+						enemyProjectiles.add(p);
+					}
 				}
 
 			}

@@ -44,10 +44,7 @@ public class Boss0 extends main.Enemy {
 	{
 		System.out.println("YOINK!");
 		shootCount=60;
-		if (shootCount > 55)
-			return new Projectile(x+10,y,-3);
-		else
-			return new Projectile(x-10,y,-3);
+		return new Projectile(x+10,y,-3);
 	}
 	
 	//determines enemy movement

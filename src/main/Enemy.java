@@ -66,6 +66,11 @@ public class Enemy extends Shooter{
 		shootCount=160;
 		return new Projectile(x,y,-1);
 	}
+//returns a projectile
+	public Projectile shoot(int xC)
+	{
+		return new Projectile(xC,y,-3,atk);
+	}
 	//determines enemy movement
 	public void act() {
 		if (driftDir&&hp>0) {		
