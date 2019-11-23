@@ -6,6 +6,8 @@ package main;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+import enemies.Ninja;
+
 //game logic
 public class ShooterGame {
 	// Fields:
@@ -371,7 +373,11 @@ public class ShooterGame {
 			int x = (int) (Math.random() * 300) + 150;
 			int y = (int) (Math.random() * 100) + 20;
 			int k = (int) (Math.random() * 10) + 1;
-			Enemy newEnemy = new Enemy(x, y, k);
+			Enemy newEnemy;
+			if (difficulty > Ninja.minDif && (int)(Math.random()*Ninja.nMod) == 0) 
+				newEnemy = new Ninja(x, y, k);
+			else
+				newEnemy = new Enemy(x, y, k);
 			enemies.add(newEnemy);
 		}
 	}
