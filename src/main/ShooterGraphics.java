@@ -139,7 +139,7 @@ public class ShooterGraphics extends JPanel implements ActionListener, KeyListen
 					gameStart = true;
 					if (paused) {
 						paused = false;
-						game.difficulty++;
+						game.nextWave();
 					}
 				}
 				if (e.getKeyCode() == KeyboardInput.ONE) {
@@ -205,39 +205,39 @@ public class ShooterGraphics extends JPanel implements ActionListener, KeyListen
 				&& !choiceMade) {
 			g.drawImage(choose, 0, 0, null);
 			if (key1 == true && choiceMade == false) {
-				game.difficulty = 1;
+				game.setWaveNum(1);
 				choiceMade = true;
 			} else if (key2 == true && choiceMade == false) {
-				game.difficulty = 2;
+				game.setWaveNum(2);
 				choiceMade = true;
 			} else if (key3 == true && choiceMade == false) {
-				game.difficulty = 3;
+				game.setWaveNum(3);
 				choiceMade = true;
 			} else if (gKey == true && choiceMade == false) {
-				game.difficulty = 27;
+				game.setWaveNum(27);
 				choiceMade = true;
 			}
 		}
-		if (game.difficulty!=0 && game.difficulty%5 == 0) {
+		if (game.getWaveStatus()) {
 			paused = true;
 		}
-		if (paused) { //Wave# = difficulty/5
+		if (paused) { //Wave# = getWaveNum()/5
 			rainbow(g, this.getWidth(), this.getHeight());
 			g.setFont(new java.awt.Font("serif", java.awt.Font.PLAIN, 30));
 			g.drawString("Congratulations", this.getWidth()/20, this.getHeight()/4);
-			g.drawString("You completed wave " + (game.difficulty/5-1), this.getWidth()/20, this.getHeight()/3);
+			g.drawString("You completed wave " + (game.getWaveNum()), this.getWidth()/20, this.getHeight()/3);
 			g.drawString("Press 'S' to start next wave", this.getWidth()/20, (int)(this.getHeight()/2.6));
 			g.setFont(new java.awt.Font("serif", java.awt.Font.PLAIN, 18));
 			g.drawString("Press the corresponding number to purchase from shop", this.getWidth()/20, (int)(this.getHeight()/2.4));
 		}
-		else if (game.difficulty >= 1 && gameStart == true) {
-			if(game.difficulty<26)//for lower difficulty background
+		else if (game.getWaveNum() >= 1 && gameStart == true) {
+			if(game.getWaveNum()<26)//for lower getWaveNum() background
 			{
-				Color bgc = new Color((30*game.difficulty)%255, (255-10*game.difficulty)%255, 100);
+				Color bgc = new Color((30*game.getWaveNum())%255, (255-10*game.getWaveNum())%255, 100);
 				g.setColor(bgc);
 				g.fillRect(0, 0, 1000, 500);
 			}
-			else//for the rainbow background when difficulty gets high enough
+			else//for the rainbow background when getWaveNum() gets high enough
 			{
 				int x = 600;
 			    int y = 490;
@@ -406,7 +406,7 @@ int degrees=45 - (int)(45 * Math.cos(0.016* Math.PI * time));
 			//updates side panel
 			if(ship.getHP()>0)
 			{
-				panel.update(ship.getHP(), game.score, game.difficulty);
+				panel.update(ship.getHP(), game.score, game.getWaveNum());
 			}
 			//game methods called to update various statuses
 			game.moveEnemies();
@@ -612,7 +612,7 @@ int degrees=45 - (int)(45 * Math.cos(0.016* Math.PI * time));
 		// TODO Auto-generated method stub
 
 	}
-	//For each time the timer fires, increments time, repaints, moves the player, and may increase difficulty and/or score
+	//For each time the timer fires, increments time, repaints, moves the player, and may increase getWaveNum() and/or score
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
@@ -621,8 +621,8 @@ int degrees=45 - (int)(45 * Math.cos(0.016* Math.PI * time));
 		repaint();
 		if (gameStart == true && choiceMade == true&&ship.getHP()>0) moveStuff();
 		/*if ((int) (Math.random() * 1200) == 0&&ship.getHP()>0 && gameStart == true && choiceMade == true) {
-			game.difficulty++;
-			game.score += 150 * game.difficulty;
+			game.getWaveNum()++;
+			game.score += 150 * game.getWaveNum();
 		}*/
 		if (time % 10 == 0&&ship.getHP()>0 && gameStart == true && choiceMade == true) {
 			game.score++;
