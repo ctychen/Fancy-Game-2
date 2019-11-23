@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.Graphics;
 import java.awt.GridLayout;
 
 public class Shop extends JFrame{
@@ -144,10 +145,12 @@ public class Shop extends JFrame{
 		graphics.add(f9);
 		graphics.add(f10);
 		graphics.setVisible(true);
-		Container c = getContentPane();
-	    c.setBackground(Color.WHITE);
-	    c.add(graphics, BorderLayout.CENTER);
+	    setBackground(Color.WHITE); //Doesnt do anything... REEEEE
+	    add(graphics, BorderLayout.CENTER);
+	    setVisible(true);
+	    //repaint();
 	}
+	
 	public static void main(String[] args)
 	{
 		Shop shop = new Shop();
