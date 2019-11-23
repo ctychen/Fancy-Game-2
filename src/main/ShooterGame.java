@@ -31,6 +31,8 @@ public class ShooterGame {
 	private int time;
 	//score, what it sounds like
 	public int score = 0;
+	//currency for buying in game items
+	private int currency;
 	//handles waves
 	private int waveNum;
 	private boolean waveDone;
@@ -86,10 +88,9 @@ public class ShooterGame {
 					{
 						powerUps.add(new PowerUp(enemies.get(i).x,enemies.get(i).y));
 						//System.out.println("boi");
-					}
-					if ((int) (Math.random() * enemies.get(i).rMod) == 0&&ship.getHP()>0) {
-						score += 150 * (waveNum/5+1);
-					}
+					}					
+					score += 150 * (waveNum/5+1);
+					currency+=50+10*(waveNum/5);
 					enemies.remove(i);
 					i--;
 				}
@@ -125,7 +126,8 @@ public class ShooterGame {
 						//System.out.println("boi");
 					}
 					obstacles.remove(i);
-					score += 100*waveNum/10;
+					score += 100+10*waveNum;
+					currency+=20+5*(waveNum/2);
 					i--;
 				} 
 			}
@@ -546,11 +548,11 @@ public class ShooterGame {
 				}
 				else if(powerUps.get(i).getType()==3)
 				{
-					score+=1000;
+					currency+=1000;
 				}
 				else if(powerUps.get(i).getType()==4)
 				{
-					score+=2000;
+					currency+=2000;
 				}
 				else if(powerUps.get(i).getType()==5)
 				{
@@ -599,6 +601,7 @@ public class ShooterGame {
 		currentWave = new Wave(10+waveNum,5+waveNum,new Enemy(300,60,30+waveNum/5), waveNum+1);
 		waveNum++;
 		score+=waveNum*1000;
+		currency+=100*waveNum;
 		waveDone=false;
 	}
 	public void setWaveNum(int x) {
@@ -607,5 +610,17 @@ public class ShooterGame {
 	public boolean getWaveStatus() {
 		return waveDone;
 	}
-	
+	public boolean spend(int amt) {
+		if(amt>currency)
+		{
+			currency-=amt;
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	public int getCurrency() {
+		return currency;
+	}
 }
