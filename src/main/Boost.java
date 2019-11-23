@@ -1,3 +1,4 @@
+package main;
 //Primary Contributor: Claire Chen
 //Version Number:1
 //Date of Completion: 5/14/18 
