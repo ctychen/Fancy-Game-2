@@ -18,6 +18,7 @@ public class Shooter extends Polygon{
 	boolean blownUp;
 	protected int explosionCount;
 	boolean damaged = false;
+	private int[] effects;
 //Constructor:
 	//default
 	public Shooter(int xCoord,int yCoord)
@@ -29,7 +30,7 @@ public class Shooter extends Polygon{
 		y=yCoord;
 		blownUp=false;
 		explosionCount=0;
-		
+		effects=new int[3];
 	}
 	//if you want a specific hp
 	public Shooter(int xCoord,int yCoord, int k)
@@ -176,5 +177,8 @@ public class Shooter extends Polygon{
 	protected void spookyCheckBounds() {
 		checkBounds();
 	}
-	
+	//TODO: sets an effect countdown in the effects array
+	public void addEffect(int i) {
+		
+	}
 }

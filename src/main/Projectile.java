@@ -12,6 +12,7 @@ public class Projectile extends Polygon{
 	public int xC,yC,v;//center coords and velocity
 	private int power;
 	private boolean spent;
+	private int effect;
 //Constructor:
 	public Projectile(int x,int y, int k)
 	{
@@ -25,6 +26,7 @@ public class Projectile extends Polygon{
 		v=k;
 		spent=false;
 		power=0;
+		effect=0;
 	}
 	public Projectile(int x,int y, int k, int atk)
 	{
@@ -38,6 +40,7 @@ public class Projectile extends Polygon{
 		v=k;
 		spent=false;
 		power=atk;
+		effect=0;
 	}
 //Returns the x and y centers
 	public int getX()
