@@ -29,9 +29,13 @@ public class ShooterGame {
 	private ArrayList<PowerUp> powerUps;
 	//time
 	private int time;
-	//score and difficulty, what they sound like
-	public int difficulty, score = 0;
-
+	//score, what it sounds like
+	public int score = 0;
+	//handles waves
+	private int waveNum;
+	private boolean waveDone;
+	private Wave currentWave;
+	private int enemyNum,obstacleCt,obsNum;
 	// Constructor:
 	public ShooterGame(int t, Player s, int w, int h) {
 		time = t;
@@ -48,6 +52,8 @@ public class ShooterGame {
 		playerProjectiles = new ArrayList<Projectile>();
 		enemyProjectiles = new ArrayList<Projectile>();
 		powerUps=new ArrayList<PowerUp>();
+		Enemy e=new Enemy(300,60,30);
+		currentWave=new Wave(10,5,e);
 	}
 
 	// Returns 0 for alive, 1 for exploding, 2 for dead
@@ -82,8 +88,7 @@ public class ShooterGame {
 						//System.out.println("boi");
 					}
 					if ((int) (Math.random() * enemies.get(i).rMod) == 0&&ship.getHP()>0) {
-						difficulty++;
-						score += 150 * difficulty;
+						score += 150 * waveNum;
 					}
 					enemies.remove(i);
 					
@@ -342,7 +347,7 @@ public class ShooterGame {
 
 	// makes new obstacles
 	public void generateObstacle() {
-		if ((int) (Math.random() * 1200 / (difficulty + 1)) == 10) {
+		/*if ((int) (Math.random() * 1200 / (waveNum + 1)) == 10) {
 			int xC = (int) (Math.random() * width);
 			int yC = -50;
 			int dx = (int) (Math.random() * 3);
@@ -354,12 +359,19 @@ public class ShooterGame {
 			}
 			Obstacle newObs = new Obstacle(xC, yC, dx, dy, type);
 			obstacles.add(newObs);
+		}*/
+		if(obstacleCt>=currentWave.getObsDelay()&&obsNum<currentWave.getObstacles().length)
+		{
+			obstacles.add(currentWave.getObstacles()[obsNum]);
+			obsNum++;
+			obstacleCt=0;
 		}
+		obstacleCt++;
 	}
 
 	// makes boosts
 	public void generateBoost() {
-		if ((int) (Math.random() * 1200 / (difficulty + 1)) == 10) {
+		if ((int) (Math.random() * 1200 / (waveNum + 1)) == 10) {
 			int x = (int) (300);
 			int y = (int) (Math.random() * 100) + 20;
 			Boost newBoost = new Boost(x, y);
@@ -369,16 +381,31 @@ public class ShooterGame {
 
 	// makes new enemies
 	public void generateEnemy() {
-		if ((int) (Math.random() * 2000 / (difficulty + 1)) == 10) {
+		/*if ((int) (Math.random() * 2000 / (waveNum + 1)) == 10) {
 			int x = (int) (Math.random() * 300) + 150;
 			int y = (int) (Math.random() * 100) + 20;
 			int k = (int) (Math.random() * 10) + 1;
 			Enemy newEnemy;
-			if (difficulty > Ninja.minDif && (int)(Math.random()*Ninja.nMod) == 0) 
+			if (waveNum > Ninja.minDif && (int)(Math.random()*Ninja.nMod) == 0) 
 				newEnemy = new Ninja(x, y, k);
 			else
 				newEnemy = new Enemy(x, y, k);
 			enemies.add(newEnemy);
+		}*/
+		if(enemies.size()<currentWave.getMaxEnemies()&&enemyNum<currentWave.getEnemies().length)
+		{
+			enemies.add(currentWave.getEnemies()[enemyNum]);
+			enemyNum++;
+		}
+		else if(enemyNum==currentWave.getEnemies().length&&enemies.size()==0)
+		{
+			enemies.add(currentWave.getBoss());
+			enemyNum++;
+		}
+		else if(enemyNum>currentWave.getEnemies().length&&enemies.size()==0) {
+			waveDone=true;
+			enemyNum=0;
+			obsNum=0;
 		}
 	}
 
@@ -567,5 +594,19 @@ public class ShooterGame {
 	{
 		return powerUps;
 	}
-
+	public int getWaveNum() {
+		return waveNum;
+	}
+	public void nextWave() {
+		currentWave = new Wave(10+waveNum,5+waveNum,new Enemy(300,60,30+waveNum/5));
+		waveNum++;
+		waveDone=false;
+	}
+	public void setWaveNum(int x) {
+		waveNum=x;
+	}
+	public boolean getWaveStatus() {
+		return waveDone;
+	}
+	
 }
