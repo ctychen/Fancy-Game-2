@@ -16,12 +16,14 @@ public class Boss0 extends main.Enemy {
 		// TODO Auto-generated constructor stub
 		speed = 1;
 		image = ShooterGraphics.boss0Image;
+		bulletCount = 2;
 	}
 	
 	public Boss0(int x, int y, int k,int attack, int defense) {
 		super(x, y, k, attack, defense);
 		speed = 1;
 		image = ShooterGraphics.boss0Image;
+		bulletCount = 2;
 	}
 	
 	
@@ -40,8 +42,12 @@ public class Boss0 extends main.Enemy {
 	//Creates and returns a projectile
 	public Projectile shoot()
 	{
+		System.out.println("YOINK!");
 		shootCount=60;
-		return new Projectile(x,y,-1);
+		if (shootCount > 55)
+			return new Projectile(x+10,y,-3);
+		else
+			return new Projectile(x-10,y,-3);
 	}
 	
 	//determines enemy movement

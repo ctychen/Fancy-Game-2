@@ -15,13 +15,14 @@ public class Enemy extends Shooter{
 	protected int speed = 1;
 	protected java.awt.Image image = ShooterGraphics.enemyImage;
 	public int rMod = 3; // 1/rMod = the chance of increasing the difficulty by killing this, put 0 to guarrantee it
+	public int bulletCount = 1;
 	//Constructor:
 	public Enemy(int x, int y, int k)
 	{
 		super(x,y,k);
 		driftDir=new Random().nextBoolean();
 		shapeMe();
-		shootCount=160;
+		shootCount=100+(int)(Math.random()*100);
 		
 	}
 	public Enemy(int x, int y, int k,int attack, int defense)
@@ -29,7 +30,7 @@ public class Enemy extends Shooter{
 		super(x,y,k,attack,defense);
 		driftDir=new Random().nextBoolean();
 		shapeMe();
-		shootCount=160;
+		shootCount=100+(int)(Math.random()*100);
 		
 	}
 	

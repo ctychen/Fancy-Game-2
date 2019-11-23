@@ -284,8 +284,10 @@ public class ShooterGame {
 		for (int i = 0; i < enemies.size(); i++) {
 			Enemy enemy = (enemies.get(i));
 			if (enemy.timeToShoot()) {
-				Projectile p = enemy.shoot();
-				enemyProjectiles.add(p);
+				for (int j = 0; j < enemy.bulletCount; j++) {
+					Projectile p = enemy.shoot();
+					enemyProjectiles.add(p);
+				}
 
 			}
 		}
