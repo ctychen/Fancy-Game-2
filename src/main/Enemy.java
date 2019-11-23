@@ -8,20 +8,16 @@ import java.util.Random;
 //Represents an enemy
 public class Enemy extends Shooter{
 	//Fields:
-	private boolean driftDir, blownUp=false, crit=false;
-	private int shootCount;
+	protected boolean driftDir, blownUp=false, crit=false;
+	protected int shootCount;
+	protected int speed = 1;
 	public int rMod = 3; // 1/rMod = the chance of increasing the difficulty by killing this, put 0 to guarrantee it
 	//Constructor:
 	public Enemy(int x, int y, int k)
 	{
 		super(x,y,k);
 		driftDir=new Random().nextBoolean();
-		super.addPoint(x-5, y);
-		super.addPoint(x+5, y);
-		super.addPoint(x+5, y-8);
-		super.addPoint(x+30, y-30);
-		super.addPoint(x-30, y-30);
-		super.addPoint(x-5, y-8);
+		shapeMe();
 		shootCount=160;
 		
 	}
@@ -29,14 +25,17 @@ public class Enemy extends Shooter{
 	{
 		super(x,y,k,attack,defense);
 		driftDir=new Random().nextBoolean();
+		shapeMe();
+		shootCount=160;
+		
+	}
+	protected void shapeMe() {
 		super.addPoint(x-5, y);
 		super.addPoint(x+5, y);
 		super.addPoint(x+5, y-8);
 		super.addPoint(x+30, y-30);
 		super.addPoint(x-30, y-30);
 		super.addPoint(x-5, y-8);
-		shootCount=160;
-		
 	}
 	public void setRMod(int rMod) {
 		this.rMod = rMod;
@@ -73,18 +72,23 @@ public class Enemy extends Shooter{
 	//Drifts Right and Left respectively at a slow pace
 	public void driftRight()
 	{
-			super.translate(1,0);
-			super.x++;
+			super.translate(speed,0);
+			super.x+=speed;
 	}
 	public void driftLeft()
 	{
-			super.translate(-1,0);
-			super.x--;
+			super.translate(-speed,0);
+			super.x-=speed;
 	}
 	//Drifts downwards small amounts randomly
 	public void driftDown() {
-		super.translate(0, 1);
-		super.y++;
+		super.translate(0, speed);
+		super.y+=speed;
+	}
+	//Drifts upwards small amounts
+	public void driftUp() {
+		super.translate(0, -speed);
+		super.y-=speed;
 	}
 	//Returns and sets the direction of drift respectively
 	public boolean getDriftDir()

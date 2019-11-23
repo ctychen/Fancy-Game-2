@@ -11,10 +11,12 @@ import javax.swing.JFrame;
 //represents a "shooter"
 public class Shooter extends Polygon{
 //Fields:
-	int x,y;
-	int hp,atk,def;
+	protected int x,y;
+	protected int hp;
+	int atk;
+	int def;
 	boolean blownUp;
-	private int explosionCount;
+	protected int explosionCount;
 	boolean damaged = false;
 //Constructor:
 	//default
@@ -169,6 +171,10 @@ public class Shooter extends Polygon{
 			super.translate(0,400);
 			y += 400;
 		}
+	}
+	
+	protected void spookyCheckBounds() {
+		checkBounds();
 	}
 	
 }
