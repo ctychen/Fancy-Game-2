@@ -529,6 +529,17 @@ public class ShooterGame {
 				{
 					ship.shieldHP=10;
 				}
+				else if(powerUps.get(i).getType()==8)
+				{
+					for(Enemy e: enemies) {
+						e.explode();
+					}
+					for(Obstacle o: obstacles)
+					{
+						o.explode();
+					}
+					enemyProjectiles = new ArrayList<Projectile>();
+				}
 				powerUps.remove(i);
 				i--;
 			}
