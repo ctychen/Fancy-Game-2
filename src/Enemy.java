@@ -9,6 +9,7 @@ public class Enemy extends Shooter{
 	//Fields:
 	private boolean driftDir, blownUp=false, crit=false;
 	private int shootCount;
+	public int rMod = 120; // 1/rMod = the chance of increasing the difficulty by killing this, put 0 to guarrantee it
 	//Constructor:
 	public Enemy(int x, int y, int k)
 	{
@@ -35,6 +36,9 @@ public class Enemy extends Shooter{
 		super.addPoint(x-5, y-8);
 		shootCount=160;
 		
+	}
+	public void setRMod(int rMod) {
+		this.rMod = rMod;
 	}
 	//returns true if it's time for the enemy to shoot
 	public boolean timeToShoot() {

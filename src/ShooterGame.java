@@ -79,6 +79,10 @@ public class ShooterGame {
 						//System.out.println("boi");
 					}
 					enemies.remove(i);
+					if ((int) (Math.random() * enemies.get(i).rMod) == 0&&ship.getHP()>0) {
+						difficulty++;
+						score += 150 * difficulty;
+					}
 					score += 200;
 					i--;
 				}

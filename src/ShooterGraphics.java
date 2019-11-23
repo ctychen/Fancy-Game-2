@@ -619,10 +619,10 @@ int degrees=45 - (int)(45 * Math.cos(0.016* Math.PI * time));
 		game.incrementTime();
 		repaint();
 		if (gameStart == true && choiceMade == true&&ship.getHP()>0) moveStuff();
-		if ((int) (Math.random() * 1200) == 0&&ship.getHP()>0 && gameStart == true && choiceMade == true) {
+		/*if ((int) (Math.random() * 1200) == 0&&ship.getHP()>0 && gameStart == true && choiceMade == true) {
 			game.difficulty++;
 			game.score += 150 * game.difficulty;
-		}
+		}*/
 		if (time % 10 == 0&&ship.getHP()>0 && gameStart == true && choiceMade == true) {
 			game.score++;
 			//System.out.println(time);
