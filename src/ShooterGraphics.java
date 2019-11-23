@@ -70,10 +70,21 @@ public class ShooterGraphics extends JPanel implements ActionListener, KeyListen
 	public static Image explode8 =new ImageIcon("spicyexplosion.gif").getImage().getScaledInstance(200, 200, Image.SCALE_FAST);
 	public static Image explode9 =new ImageIcon("SuperFancyExplosion.gif").getImage().getScaledInstance(200, 200, Image.SCALE_FAST);
 	public static Image fastExplode  = new ImageIcon("goodExplosion.gif").getImage();
-
+	
 	public static ArrayList<Explosion> booms;
+	
+	int[] indexes = new int[200];
+	Color[] colors = new Color[200];
+	
+	private boolean paused = false;
+	
 	//constructors
 	public ShooterGraphics() {
+		for (int k = 0; k < colors.length; k++) {
+			colors[k] = new Color(0, 0, 0);
+			indexes[k] = k;
+			
+		}
 		gameStart = false;
 		choiceMade = false;
 		booms = new ArrayList<Explosion>();
@@ -125,6 +136,10 @@ public class ShooterGraphics extends JPanel implements ActionListener, KeyListen
 				}
 				if (e.getKeyCode() == KeyboardInput.S) {
 					gameStart = true;
+					if (paused) {
+						paused = false;
+						game.difficulty++;
+					}
 				}
 				if (e.getKeyCode() == KeyboardInput.ONE) {
 					key1 = true;
@@ -202,7 +217,19 @@ public class ShooterGraphics extends JPanel implements ActionListener, KeyListen
 				choiceMade = true;
 			}
 		}
-		if (game.difficulty >= 1 && gameStart == true) {
+		if (game.difficulty!=0 && game.difficulty%5 == 0) {
+			paused = true;
+		}
+		if (paused) { //Wave# = difficulty/5
+			rainbow(g, this.getWidth(), this.getHeight());
+			g.setFont(new java.awt.Font("serif", java.awt.Font.PLAIN, 30));
+			g.drawString("Congratulations", this.getWidth()/20, this.getHeight()/4);
+			g.drawString("You completed wave " + (game.difficulty/5-1), this.getWidth()/20, this.getHeight()/3);
+			g.drawString("Press 'S' to start next wave", this.getWidth()/20, (int)(this.getHeight()/2.6));
+			g.setFont(new java.awt.Font("serif", java.awt.Font.PLAIN, 18));
+			g.drawString("Press the corresponding number to purchase from shop", this.getWidth()/20, (int)(this.getHeight()/2.4));
+		}
+		else if (game.difficulty >= 1 && gameStart == true) {
 			if(game.difficulty<26)//for lower difficulty background
 			{
 				Color bgc = new Color((30*game.difficulty)%255, (255-10*game.difficulty)%255, 100);
@@ -592,7 +619,7 @@ int degrees=45 - (int)(45 * Math.cos(0.016* Math.PI * time));
 		game.incrementTime();
 		repaint();
 		if (gameStart == true && choiceMade == true&&ship.getHP()>0) moveStuff();
-		if ((int) (Math.random() * 1200) == 1&&ship.getHP()>0 && gameStart == true && choiceMade == true) {
+		if ((int) (Math.random() * 1200) == 0&&ship.getHP()>0 && gameStart == true && choiceMade == true) {
 			game.difficulty++;
 			game.score += 150 * game.difficulty;
 		}
@@ -601,6 +628,7 @@ int degrees=45 - (int)(45 * Math.cos(0.016* Math.PI * time));
 			//System.out.println(time);
 		}
 	}
+	
 	//for moving the player
 	private void moveStuff() {
 		if (movement[0]==1)
@@ -647,5 +675,92 @@ int degrees=45 - (int)(45 * Math.cos(0.016* Math.PI * time));
 				ship.moveDown();
 			}
 		}
+	}
+	
+	private void rainbow(Graphics g, int width, int height) {
+		int s = (int)((float)width/colors.length+0.5);
+		for (int j = 0; j < colors.length; j++) {
+			changeColors(g, j);
+			g.fillRect(j*s, 0, s, height);
+			//line(width/2, height/2, width/2 + (int)(1000*Math.cos(j* (colors.length/(2*3.14)))), height/2 + (int)(1000*Math.sin(j* (colors.length/(2*3.14)))));
+			
+		}
+		
+	}
+	
+	private void changeColors(Graphics gr, int index) {
+		
+		int i = indexes[index];
+		int l = 4;
+		int r = colors[index].getRed();
+		int g = colors[index].getGreen();
+		int b = colors[index].getBlue();
+		if ( (double)((int)(System.currentTimeMillis()/10)) % 1 == 0) {
+			
+			//Starts with green
+			if (i==0) {
+				r = 100;
+				g = 255;
+				b = 100;
+			}
+			//Adds red to make yellow
+			else if (i < 155/l) {
+				r+=l;
+				g=255;
+				b=100;
+			}
+			//Removes green to make red
+			else if (i < 2*155/l) {
+				r=255;
+				g-=l;
+				b=100;
+			}
+			//Adds blue to make purple
+			else if (i < 3*155/l) {
+				r=255;
+				g=100;
+				b+=l;
+			}	
+			//Removes the red to make blue
+			else if (i < 4*155/l) {
+				r-=l;
+				g=100;
+				b=255;
+			}
+			//Adds green to make turquoise
+			else if (i < 5*155/l) {
+				r=100;
+				g+=l;
+				b=255;
+			}
+			//Removes blue to get back to green
+			else if (i < 6*155/l) {
+				r=100;
+				g=255;
+				b-=l;
+				//if(index == 0 ) System.out.println(r + " " + g + " " + b);
+			}
+			else if (i >= 6*155/l) indexes[index] = -1;
+			
+			//Makes all colors lighter
+			if (r < 100) r = 100;
+			if (g < 100) g = 100;
+			if (b < 100) b = 100;
+			
+			//Makes sure no value gets above 255
+			if (r > 255) r = 255;
+			if (g > 255) g = 255;
+			if (b > 255) b = 255;
+			
+			//Makes sure no value is negative
+			r = Math.abs(r);
+			g = Math.abs(g);
+			b = Math.abs(b);
+			indexes[index]++;
+		}
+		//System.out.println(r + " " + g + " " + b);
+		//g.fill(r, g, b);
+		gr.setColor(new Color(r, g, b));
+		colors[index] = new Color(r, g, b);
 	}
 }
