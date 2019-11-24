@@ -100,11 +100,11 @@ public class ShooterGraphics extends JPanel implements ActionListener, KeyListen
 		gameStart = false;
 		choiceMade = false;
 		booms = new ArrayList<Explosion>();
-		healthBar = new ProgressBar(10, 100, 10, 20, 20, 5, Color.ORANGE, Color.BLACK);
+		healthBar = new ProgressBar(20, 130, 10, 20, 20, 5, Color.ORANGE, Color.BLACK);
 		this.setLayout(null);
 		hpLabel= new JLabel("HP re m a i n i n g:");
 		hpLabel.setLocation(20, 3);
-		hpLabel.setSize(120, 20);
+		hpLabel.setSize(150, 20);
 		time = 0;
 		time2 = 5;
 		ship = new Player();
@@ -635,6 +635,7 @@ int degrees=45 - (int)(45 * Math.cos(0.016* Math.PI * time));
 			//draws Health bar and corresponding label
 			healthBar.set(ship.getHP());
 			healthBar.draw(g);
+			hpLabel.setText("HP r e m a i n i n g: "+ship.hp+"/"+ship.maxHP);
 			add(hpLabel);
 		}
 		if(lowGraphics == 1) g.drawImage(rg, 450, 10, this);
