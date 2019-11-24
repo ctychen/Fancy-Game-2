@@ -10,9 +10,9 @@ import java.lang.reflect.Array;
 public class Projectile extends Polygon{
 //Fields:
 	public int xC,yC,v;//center coords and velocity
-	private int power;
-	private boolean spent;
-	private int effect;
+	protected int power;
+	protected boolean spent;
+	protected int effect;
 //Constructor:
 	public Projectile(int x,int y, int k)
 	{

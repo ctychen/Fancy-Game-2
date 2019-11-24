@@ -550,7 +550,7 @@ int degrees=45 - (int)(45 * Math.cos(0.016* Math.PI * time));
 			for (int i = 0; i < epList.size(); i++) {
 				if(ship.getHP()>0)
 				{
-					if (lowGraphics > 0)
+					if (lowGraphics > 0 || epList.get(i).getClass().toString().equals("class projectiles.Laser"))
 						g.fillPolygon(epList.get(i));
 					else
 						g.drawImage(ebullet, epList.get(i).xC - 300, epList.get(i).yC - 220, null);
