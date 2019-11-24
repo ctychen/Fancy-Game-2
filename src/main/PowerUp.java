@@ -22,6 +22,7 @@ public class PowerUp {
 		y=yCoord;
 		type=(int)(Math.random()*10);
 		
+		
 	}
 	public PowerUp(int type)
 	{

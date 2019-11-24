@@ -33,6 +33,10 @@ public class Player extends Shooter{
 	{
 		return tripleShot;
 	}
+	public boolean lsCheck()
+	{
+		return laserShot;
+	}
 	public boolean dsCheck()
 	{
 		return doubleShot;
@@ -64,7 +68,7 @@ public class Player extends Shooter{
 	}
 	public void decrementTSCount()
 	{
-		lsCount--;
+		tsCount--;
 	}
 	public void startTSCount()
 	{
@@ -81,6 +85,12 @@ public class Player extends Shooter{
 	public void startLSCount()
 	{
 		lsCount=40;
+	}
+	public void decrementLSCount()
+	{
+		lsCount--;
+		if (lsCount <= 0)
+			laserShot = false;
 	}
 //Checks the state of each powerUp
 	public void checkPowerUpStatus()

@@ -615,7 +615,7 @@ int degrees=45 - (int)(45 * Math.cos(0.016* Math.PI * time));
 			g.setColor(Color.BLUE);
 			for (int i = 0; i < ppList.size(); i++) {
 
-				if (lowGraphics > 0)
+				if (lowGraphics > 0 || ppList.get(i).getClass().toString().equals("class projectiles.Laser"))
 					g.fillPolygon(ppList.get(i));
 				else
 					g.drawImage(bullet, ppList.get(i).xC - 308, ppList.get(i).yC - 220, null);
