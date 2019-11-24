@@ -7,8 +7,8 @@ package main;
 public class Player extends Shooter{
 	//Fields:
 	//booleans and counts for different powerups
-	private boolean tripleShot,doubleShot,rapidShot,fastMovement;
-	private int tsCount,dsCount,rsCount,fmCount;
+	private boolean tripleShot,doubleShot,rapidShot,fastMovement, laserShot;
+	private int tsCount,dsCount,rsCount,fmCount,lsCount;
 	int shieldHP;
 	int atkLvl,defLvl,hpLvl;
 	//Constructor:
@@ -46,6 +46,9 @@ public class Player extends Shooter{
 	{
 		return new Projectile(xC,y,3,atk);
 	}
+	public Projectile shootLaser(int xC) {
+		return new projectiles.Laser(xC, y, 500, atk);
+	}
 //sets the booleans for powerups, changes the counts, or starts the counts. See powerUp for more info on what each powerUp does.
 	public void setTS()
 	{
@@ -55,9 +58,13 @@ public class Player extends Shooter{
 	{
 		doubleShot=true;
 	}
+	public void setLS()
+	{
+		laserShot=true;
+	}
 	public void decrementTSCount()
 	{
-		tsCount--;
+		lsCount--;
 	}
 	public void startTSCount()
 	{
@@ -70,6 +77,10 @@ public class Player extends Shooter{
 	public void startDSCount()
 	{
 		dsCount=40;
+	}
+	public void startLSCount()
+	{
+		lsCount=40;
 	}
 //Checks the state of each powerUp
 	public void checkPowerUpStatus()
