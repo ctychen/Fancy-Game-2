@@ -56,7 +56,7 @@ public class ShooterGame {
 		enemyProjectiles = new ArrayList<Projectile>();
 		powerUps=new ArrayList<PowerUp>();
 		Enemy e=new Enemy(300,60,30);
-		currentWave=new Wave(10,5,e, waveNum);
+		currentWave=new Wave(1);
 		hotbar=new Hotbar();
 	}
 
@@ -434,15 +434,15 @@ public class ShooterGame {
 		for (int i = 0; i < enemies.size(); i++) {
 
 			Enemy enemy = enemies.get(i);
-			if(enemy.x<=0)
+			if(enemy!=null&&enemy.x<=0)
 			{
 				enemy.setDir(true);
 			}
-			else if(enemy.x>=width-20)
+			else if(enemy!=null&&enemy.x>=width-20)
 			{
 				enemy.setDir(false);
 			}
-			enemy.act();
+			if(enemy!=null) {enemy.act();}
 		}
 	}
 
@@ -671,13 +671,14 @@ public class ShooterGame {
 		return waveNum;
 	}
 	public void nextWave() {
-		currentWave = new Wave(10+waveNum,5+waveNum,new Enemy(300,60,30+waveNum/5), waveNum+1);
 		waveNum++;
+		currentWave=new Wave(waveNum);
 		score+=waveNum*1000;
 		currency+=100*waveNum;
 		waveDone=false;
 	}
 	public void setWaveNum(int x) {
+		currentWave=new Wave(x);
 		waveNum=x;
 	}
 	public boolean getWaveStatus() {
