@@ -167,7 +167,6 @@ public class Shop extends JFrame implements ActionListener{
 		graphics.add(e6);
 		graphics.add(e7);
 		graphics.add(e8);
-		//graphics.add(e9);
 		//graphics.add(e10);
 		graphics.add(f1);
 		graphics.add(f2);
@@ -177,7 +176,6 @@ public class Shop extends JFrame implements ActionListener{
 		graphics.add(f6);
 		graphics.add(f7);
 		graphics.add(f8);
-		//graphics.add(f9);
 		//graphics.add(f10);
 		graphics.setVisible(true);
 	    setBackground(Color.WHITE); //Doesnt do anything... REEEEE
@@ -203,7 +201,7 @@ public class Shop extends JFrame implements ActionListener{
 		int x=Integer.parseInt(sourcex);
 		String sourcey = s.substring(s.indexOf(',',s.indexOf(',')+1)+1,s.indexOf(',',s.indexOf(',',s.indexOf(',')+1)+1));
 		int y=Integer.parseInt(sourcey);
-		if(y==79)
+		if(Math.abs(y-81) < 10)
 		{
 			if(game.getShip().hpLvl*79+1<x)
 			{
@@ -227,7 +225,7 @@ public class Shop extends JFrame implements ActionListener{
 				game.getShip().upgradeHP();
 			}
 		}
-		else if(y==157)
+		else if(Math.abs(y-160) < 10)
 		{
 			if(game.getShip().atkLvl*79+1<x)
 			{
@@ -250,7 +248,7 @@ public class Shop extends JFrame implements ActionListener{
 				game.getShip().upgradeAtk();
 			}
 		}
-		else if(y==235) 
+		else if(Math.abs(y-239) < 10) 
 		{
 			if(game.getShip().defLvl*79+1<x)
 			{
@@ -273,11 +271,11 @@ public class Shop extends JFrame implements ActionListener{
 				game.getShip().upgradeDef();
 			}
 		}
-		else if(y==391)
+		else if(Math.abs(y-397) < 10)
 		{
 			int temp=(x-1)/79;
 			System.out.println(temp);
-			PowerUp p=new PowerUp(8);
+			PowerUp p=new PowerUp(1);
 			if(temp==1)
 			{
 				
@@ -306,7 +304,6 @@ public class Shop extends JFrame implements ActionListener{
 			{
 				p=new PowerUp(8);
 			}
-				
 			if(!game.getHotbar().addPowerUp(p))
 			{
 				game.addCurrency(Integer.parseInt(t));

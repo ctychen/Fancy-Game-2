@@ -23,11 +23,12 @@ public class Hotbar {
 		g.drawRect(531,423,24,24);
 		int x=435;
 		int y=435;
+		//System.out.println("Yeet");
 		for(int i=0;i<powerups.size();i++)
 		{
 			int type=powerups.get(i).getType();
 			g.setColor(Color.GRAY);
-			//System.out.println(type);
+			//System.out.println("Type = " + type);
 			g.fillRect(x-12, y-12, 24, 24);
 			if(type==0)
 			{
@@ -91,6 +92,11 @@ public class Hotbar {
 				g.fillArc(x-8, y-8, 16, 16, 60, 60);
 				g.fillArc(x-8, y-8, 16, 16, 180, 60);
 				g.fillArc(x-8, y-8, 16, 16, 300, 60);
+			}
+			else if(type==9) {
+				g.setColor(Color.RED);
+				g.drawOval(x-2, y+8, 4, 4);
+				g.drawLine(x, y+8, x, y-8);
 			}
 			x+=27;
 		}
