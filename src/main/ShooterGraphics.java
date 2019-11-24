@@ -37,6 +37,7 @@ public class ShooterGraphics extends JPanel implements ActionListener, KeyListen
 	public static Image enemyImage = new ImageIcon("ei.png").getImage();
 	public static Image ninjaImage = new ImageIcon("ni.png").getImage();
 	public static Image boss0Image = new ImageIcon("b0i.png").getImage();
+	public static Image specialImage = new ImageIcon("si.png").getImage();
 	private Image choose = new ImageIcon("choose.png").getImage();
 	private Image bg1 = new ImageIcon("bkgd1.png").getImage();
 	private Image bg2 = new ImageIcon("bkgd2.png").getImage();
