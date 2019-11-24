@@ -53,6 +53,7 @@ public class ShooterGraphics extends JPanel implements ActionListener, KeyListen
 	private Image bullet = new ImageIcon("bulleti.png").getImage();
 	private Image ebullet = new ImageIcon("ebulleti.png").getImage();
 	private Image asteroidImg = new ImageIcon("asteroidi.png").getImage();
+	private Image missileImg = new ImageIcon("missilei.png").getImage();
 	private ArrayList<Point2D> stars = new ArrayList<Point2D>();
 	Timer clock;
 	int timesRestarted = 0;
@@ -557,6 +558,7 @@ int degrees=45 - (int)(45 * Math.cos(0.016* Math.PI * time));
 			{
 				if (booms.get(i).getTimeAlive() < booms.get(i).getMaxTime()) booms.get(i).draw(g);
 				else booms.remove(i);
+				if (lowGraphics == 1 && booms.get(i).getTimeAlive() > 80) booms.remove(i);
 			}
 			//draws enemies
 			for (int i = 0; i < eList.size(); i++) {
@@ -586,6 +588,7 @@ int degrees=45 - (int)(45 * Math.cos(0.016* Math.PI * time));
 			for (int i = 0; i < oList.size(); i++) {
 				if (oList.get(i).getHP() > 0&&ship.getHP()>0) {
 					if(lowGraphics < 2 && oList.get(i).getType() == 2) g.drawImage(asteroidImg, oList.get(i).x-304, oList.get(i).y-200, null);
+					if(lowGraphics < 2 && oList.get(i).getType() == 1) g.drawImage(missileImg, oList.get(i).x-304, oList.get(i).y-200, null);
 					else g.fillPolygon(oList.get(i));
 				} else {
 					if (oList.get(i).getCount() < 60) {
