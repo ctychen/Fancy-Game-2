@@ -15,6 +15,7 @@ public class Hotbar {
 		g.setColor(Color.WHITE);
 		g.fillRect(420, 420, 138, 30);
 		g.setColor(Color.GRAY);
+		g.drawString(" 1     2     3     4     5", 423, 420);
 		g.drawRect(423,423,24,24);
 		g.drawRect(450,423,24,24);
 		g.drawRect(477,423,24,24);
