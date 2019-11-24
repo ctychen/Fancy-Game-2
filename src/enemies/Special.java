@@ -15,13 +15,13 @@ public class Special extends main.Enemy {
 		super(x, y, k);
 		// TODO Auto-generated constructor stub
 		speed = 2;
-		//image = ShooterGraphics.specialImage;
+		image = ShooterGraphics.specialImage;
 	}
 	
 	public Special(int x, int y, int k,int attack, int defense) {
 		super(x, y, k, attack, defense);
 		speed = 2;
-		//image = ShooterGraphics.specialImage;
+		image = ShooterGraphics.specialImage;
 	}
 	
 	
