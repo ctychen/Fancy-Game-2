@@ -44,9 +44,9 @@ public class Boss1 extends main.Enemy {
 		//System.out.println("YOINK!");
 		shootCount=30;
 		if ((int)(Math.random()*2)==0)
-			return new projectiles.Laser(x+35,y,-500);
+			return new projectiles.Laser(x+35,y,-500,atk);
 		else
-			return new projectiles.Laser(x-35,y,-500);
+			return new projectiles.Laser(x-35,y,-500,atk);
 	}
 	
 	//determines enemy movement

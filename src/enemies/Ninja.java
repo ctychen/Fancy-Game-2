@@ -40,7 +40,7 @@ public class Ninja extends main.Enemy {
 	public Projectile shoot()
 	{
 		shootCount=20;
-		return new Projectile(x,y,-1);
+		return new Projectile(x,y,-1,atk);
 	}
 	
 	//determines enemy movement
