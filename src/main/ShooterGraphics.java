@@ -52,6 +52,7 @@ public class ShooterGraphics extends JPanel implements ActionListener, KeyListen
 	private Image critImg = new ImageIcon("crit.png").getImage();
 	private Image bullet = new ImageIcon("bulleti.png").getImage();
 	private Image ebullet = new ImageIcon("ebulleti.png").getImage();
+	private Image asteroidImg = new ImageIcon("asteroidi.png").getImage();
 	private ArrayList<Point2D> stars = new ArrayList<Point2D>();
 	Timer clock;
 	int timesRestarted = 0;
@@ -584,7 +585,8 @@ int degrees=45 - (int)(45 * Math.cos(0.016* Math.PI * time));
 			//draws obstacles
 			for (int i = 0; i < oList.size(); i++) {
 				if (oList.get(i).getHP() > 0&&ship.getHP()>0) {
-					g.fillPolygon(oList.get(i));
+					if(lowGraphics < 2 && oList.get(i).getType() == 2) g.drawImage(asteroidImg, oList.get(i).x-304, oList.get(i).y-200, null);
+					else g.fillPolygon(oList.get(i));
 				} else {
 					if (oList.get(i).getCount() < 60) {
 						if (lowGraphics == 2) {g.setColor(Color.RED); g.fillOval((oList.get(i)).x - 75,  (oList.get(i)).y - 75, 150, 150); g.setColor(Color.BLACK);}
