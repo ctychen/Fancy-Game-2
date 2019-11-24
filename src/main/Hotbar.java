@@ -96,7 +96,7 @@ public class Hotbar {
 	}
 	public void usePowerUp(ShooterGame g, int i)
 	{
-		if(powerups.size()>0)
+		if(powerups.size()>i)
 		{
 			g.applyPowerUp(powerups.get(i).getType());
 			powerups.remove(i);

@@ -27,7 +27,7 @@ public class PowerUp {
 	{
 		x=0;
 		y=0;
-		type=(int)(Math.random()*9);
+		this.type=type;
 		
 	}
 	//moves the power up

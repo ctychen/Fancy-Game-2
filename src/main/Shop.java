@@ -275,8 +275,9 @@ public class Shop extends JFrame implements ActionListener{
 		}
 		else if(y==391)
 		{
-			int temp=(x-1)/6;
-			PowerUp p=new PowerUp(0);
+			int temp=(x-1)/79;
+			System.out.println(temp);
+			PowerUp p=new PowerUp(8);
 			if(temp==1)
 			{
 				
