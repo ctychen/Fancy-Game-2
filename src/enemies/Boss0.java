@@ -44,7 +44,7 @@ public class Boss0 extends main.Enemy {
 	{
 		//System.out.println("YOINK!");
 		shootCount=60;
-		return new Projectile(x+10,y,-3);
+		return new Projectile(x+10,y,-3,atk);
 	}
 	
 	//determines enemy movement

@@ -64,7 +64,7 @@ public class Enemy extends Shooter{
 	public Projectile shoot()
 	{
 		shootCount=160;
-		return new Projectile(x,y,-1);
+		return new Projectile(x,y,-1,atk);
 	}
 //returns a projectile
 	public Projectile shoot(int xC)

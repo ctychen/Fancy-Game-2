@@ -13,8 +13,8 @@ public class Shooter extends Polygon{
 //Fields:
 	protected int x,y;
 	protected int hp, maxHP;
-	int atk;
-	int def;
+	protected int atk;
+	protected int def;
 	boolean blownUp;
 	protected int explosionCount;
 	boolean damaged = false;
