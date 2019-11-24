@@ -261,7 +261,7 @@ public class ShooterGraphics extends JPanel implements ActionListener, KeyListen
 							bgcm = new Color(Math.min(255, Math.max(bgc.getRed()+100-i, bgc.getRed())), Math.min(255, Math.max(bgc.getGreen()+100-i, bgc.getGreen())), Math.min(255, Math.max(bgc.getBlue()+100-i, bgc.getBlue())));
 						}
 						g.setColor(bgcm);
-						g.fillRect(0, y, this.getWidth(), 1);
+						g.fillRect(0, y, this.getWidth(), 2);
 						
 					}
 				}
