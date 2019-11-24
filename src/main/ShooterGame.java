@@ -148,6 +148,7 @@ public class ShooterGame {
 		for (int i = 0; i < playerProjectiles.size(); i++) {
 			// System.out.println("i:"+i);
 			Projectile p = playerProjectiles.get(i);// (Projectile)(Array.get(playerProjectiles, i));
+			
 			if (p.collisionStatus()||p.getY()<-200) {
 				playerProjectiles.remove(i);
 				i--;
@@ -165,6 +166,20 @@ public class ShooterGame {
 	// same, but for enemy projectiles, also handles if it hits the player
 	public void epsUpdate() {
 		for (int i = 0; i < enemyProjectiles.size(); i++) {
+			if (enemyProjectiles.get(i).getClass().toString().equals("class projectiles.Laser")) {
+				if (Math.abs(ship.x-enemyProjectiles.get(i).getX()) < 5) {
+					if(ship.shieldHP>0)
+					{
+						(enemyProjectiles.get(i)).collide();
+						ship.shieldHP--;
+					}
+					else
+					{
+						(enemyProjectiles.get(i)).collide();
+						ship.damage(enemyProjectiles.get(i).getPower(),ship.def);
+					}
+				}
+			}
 			if (ship.contains(enemyProjectiles.get(i).getX(), enemyProjectiles.get(i).getY()) && ship.getHP() > 0) {
 				if(ship.shieldHP>0)
 				{
@@ -211,7 +226,14 @@ public class ShooterGame {
 	// handles player projectile collisions with enemy
 	public boolean hitEnemy(Projectile p) {
 		for (int i = 0; i < enemies.size(); i++) {
-			if (enemies.get(i).contains(p.getX(), p.getY())) {
+			if (p.getClass().toString().equals("class projectiles.Laser")) {
+				if (Math.abs(enemies.get(i).x-p.getX()) < 5) {
+					
+						enemies.get(i).damage(p.getPower(),enemies.get(i).def);
+					
+				}
+			}
+			else if (enemies.get(i).contains(p.getX(), p.getY())) {
 				if(enemies.get(i).x-p.getX()<2&&enemies.get(i).x-p.getX()>-2)
 				{
 					enemies.get(i).explode();
@@ -335,6 +357,11 @@ public class ShooterGame {
 					playerProjectiles.add(ship.shoot(ship.x+7));
 					ship.decrementDSCount();
 				}
+				else if(ship.lsCheck()==true)//if laser, but not triple, shooting
+				{
+					playerProjectiles.add(ship.shootLaser(ship.x));
+					ship.decrementLSCount();
+				}
 				ship.decrementRSCount();
 			}
 		}
@@ -342,7 +369,7 @@ public class ShooterGame {
 		{
 			if(time%20==0&&ship.getHP()>0)
 			{
-				if(!ship.dsCheck()&&!ship.tsCheck())
+				if(!ship.dsCheck()&&!ship.tsCheck()&&!ship.lsCheck())
 				{
 					Projectile p=ship.shoot();
 					playerProjectiles.add(p);
@@ -359,6 +386,11 @@ public class ShooterGame {
 					playerProjectiles.add(ship.shoot(ship.x-7));
 					playerProjectiles.add(ship.shoot(ship.x+7));
 					ship.decrementDSCount();
+				}
+				else if(ship.lsCheck()==true)//if laser, but not triple, shooting
+				{
+					playerProjectiles.add(ship.shootLaser(ship.x));
+					ship.decrementLSCount();
 				}
 			}
 		}
@@ -602,6 +634,11 @@ public class ShooterGame {
 					}
 					enemyProjectiles = new ArrayList<Projectile>();
 				}
+				else if(powerUps.get(i).getType()==9)
+				{
+					ship.setLS();
+					ship.startLSCount();
+				}
 				powerUps.remove(i);
 				i--;
 			}
@@ -659,6 +696,11 @@ public class ShooterGame {
 				o.explode();
 			}
 			enemyProjectiles = new ArrayList<Projectile>();
+		}
+		else if(type==9)
+		{
+			ship.setLS();
+			ship.startLSCount();
 		}
 	}
 	//accessor for powerUps
