@@ -425,9 +425,13 @@ public class ShooterGame {
 		for (int i = 0; i < enemies.size(); i++) {
 
 			Enemy enemy = enemies.get(i);
-			if(enemy.x<=0||enemy.x>=width)
+			if(enemy.x<=0)
 			{
-				enemy.setDir(!enemy.getDriftDir());
+				enemy.setDir(true);
+			}
+			else if(enemy.x>=width-20)
+			{
+				enemy.setDir(false);
 			}
 			enemy.act();
 		}

@@ -68,7 +68,7 @@ public class SidePanel extends JPanel{
 		difficulty.setText(String.valueOf(diff));
 		if(c<100000)
 		{
-			currency.setText(String.valueOf(points));
+			currency.setText(String.valueOf(curr));
 		}
 		else if(c<10000000)
 		{

@@ -237,6 +237,7 @@ public class ShooterGraphics extends JPanel implements ActionListener, KeyListen
 			g.drawString("Press 'S' to start next wave", this.getWidth()/20, (int)(this.getHeight()/2.6));
 			g.setFont(new java.awt.Font("serif", java.awt.Font.PLAIN, 18));
 			g.drawString("Press space to purchase from shop", this.getWidth()/20, (int)(this.getHeight()/2.4));
+			panel.update(ship.getHP(), game.score, game.getWaveNum(),game.getCurrency());
 		}
 		else if (game.getWaveNum() >= 1 && gameStart == true) {
 			if(game.getWaveNum()<26)//for lower getWaveNum() background
@@ -632,7 +633,7 @@ int degrees=45 - (int)(45 * Math.cos(0.016* Math.PI * time));
 			game.getWaveNum()++;
 			game.score += 150 * game.getWaveNum();
 		}*/
-		if (time % 10 == 0&&ship.getHP()>0 && gameStart == true && choiceMade == true) {
+		if (time % 10 == 0&&ship.getHP()>0 && gameStart == true && choiceMade == true&&!paused) {
 			game.score++;
 			//System.out.println(time);
 		}
