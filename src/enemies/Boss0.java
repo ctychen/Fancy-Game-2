@@ -42,7 +42,7 @@ public class Boss0 extends main.Enemy {
 	//Creates and returns a projectile
 	public Projectile shoot()
 	{
-		System.out.println("YOINK!");
+		//System.out.println("YOINK!");
 		shootCount=60;
 		return new Projectile(x+10,y,-3);
 	}

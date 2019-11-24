@@ -144,6 +144,11 @@ public class ShooterGraphics extends JPanel implements ActionListener, KeyListen
 						game.nextWave();
 					}
 				}
+				if (e.getKeyCode() == KeyboardInput.SPACE) {
+					if (paused) {
+						Shop shop=new Shop(game);
+					}
+				}
 				if (e.getKeyCode() == KeyboardInput.ONE) {
 					key1 = true;
 				}
@@ -230,7 +235,7 @@ public class ShooterGraphics extends JPanel implements ActionListener, KeyListen
 			g.drawString("You completed wave " + (game.getWaveNum()), this.getWidth()/20, this.getHeight()/3);
 			g.drawString("Press 'S' to start next wave", this.getWidth()/20, (int)(this.getHeight()/2.6));
 			g.setFont(new java.awt.Font("serif", java.awt.Font.PLAIN, 18));
-			g.drawString("Press the corresponding number to purchase from shop", this.getWidth()/20, (int)(this.getHeight()/2.4));
+			g.drawString("Press space to purchase from shop", this.getWidth()/20, (int)(this.getHeight()/2.4));
 		}
 		else if (game.getWaveNum() >= 1 && gameStart == true) {
 			if(game.getWaveNum()<26)//for lower getWaveNum() background

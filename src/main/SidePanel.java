@@ -66,7 +66,14 @@ public class SidePanel extends JPanel{
 			score.setText("GOD");
 		}
 		difficulty.setText(String.valueOf(diff));
-		currency.setText(String.valueOf(curr));
+		if(c<100000)
+		{
+			currency.setText(String.valueOf(points));
+		}
+		else if(c<10000000)
+		{
+			currency.setText(points/1000+"k");
+		}
 	}
 	//draws it
 	public void paintComponent(Graphics g)

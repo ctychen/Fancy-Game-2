@@ -2,25 +2,34 @@ package main;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class Shop extends JFrame{
+public class Shop extends JFrame implements ActionListener{
 	private JPanel graphics;
+	private JTextField b8;
+	ShooterGame game;
 	
-	public Shop() {
+	public Shop(ShooterGame g) {
 		super("Shop");
 		setBounds(0, 0, 630, 490);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setResizable(false);
 		setVisible(true);
-		graphics = new JPanel(new GridLayout(6,10,10,10));
+		game=g;
+		graphics = new JPanel(new GridLayout(6,8,10,10));
 		
 		JLabel a1=new JLabel("Upgrade Stats:");
 		JLabel a2=new JLabel("Level 2");
@@ -30,8 +39,8 @@ public class Shop extends JFrame{
 		JLabel a6=new JLabel("Max Level");
 		JLabel a7=new JLabel("");
 		JLabel a8=new JLabel("");
-		JLabel a9=new JLabel("");
-		JLabel a10=new JLabel("");
+		//JLabel a9=new JLabel("");
+		//JLabel a10=new JLabel("");
 		JLabel b1=new JLabel("HP:");
 		JLabel c1=new JLabel("Attack:");
 		JLabel d1=new JLabel("Defense:");
@@ -43,46 +52,72 @@ public class Shop extends JFrame{
 		JLabel e6=new JLabel("Fast movement:");
 		JLabel e7=new JLabel("Shield:");
 		JLabel e8=new JLabel("Nuke");
-		JLabel e9=new JLabel("");
-		JLabel e10=new JLabel("");
+		//JLabel e9=new JLabel("");
+		//JLabel e10=new JLabel("");
 		
 		JButton b2=new JButton("1000");
+		b2.addActionListener(this);
 		JButton b3=new JButton("2000");
+		b3.addActionListener(this);
 		JButton b4=new JButton("4000");
+		b4.addActionListener(this);
 		JButton b5=new JButton("8000");
+		b5.addActionListener(this);
 		JButton b6=new JButton("16000");
-		JButton b7=new JButton("32000");
-		JLabel b8=new JLabel("");
-		JLabel b9=new JLabel("");
-		JLabel b10=new JLabel("");
+		b6.addActionListener(this);
+		JLabel b7=new JLabel("Currency:");
+		Font displayFont = new Font("Monospaced", Font.BOLD, 16);
+		b8=new JTextField();
+		b8.setText(String.valueOf(game.getCurrency()));
+		b8.setFont(displayFont);
+	    b8.setEditable(false);
+		//JLabel b9=new JLabel("");
+		//JLabel b10=new JLabel("");
 		JButton c2=new JButton("1000");
+		c2.addActionListener(this);
 		JButton c3=new JButton("2000");
+		c3.addActionListener(this);
 		JButton c4=new JButton("4000");
+		c4.addActionListener(this);
 		JButton c5=new JButton("8000");
+		c5.addActionListener(this);
 		JButton c6=new JButton("16000");
-		JButton c7=new JButton("32000");
+		c6.addActionListener(this);
+		JLabel c7=new JLabel("");
 		JLabel c8=new JLabel("");
-		JLabel c9=new JLabel("");
-		JLabel c10=new JLabel("");
+		//JLabel c9=new JLabel("");
+		//JLabel c10=new JLabel("");
 		JButton d2=new JButton("1000");
+		d2.addActionListener(this);
 		JButton d3=new JButton("2000");
+		d3.addActionListener(this);
 		JButton d4=new JButton("4000");
+		d4.addActionListener(this);
 		JButton d5=new JButton("8000");
+		d5.addActionListener(this);
 		JButton d6=new JButton("16000");
-		JButton d7=new JButton("32000");
+		d6.addActionListener(this);
+		JLabel d7=new JLabel("");
 		JLabel d8=new JLabel("");
-		JLabel d9=new JLabel("");
-		JLabel d10=new JLabel("");
+		//JLabel d9=new JLabel("");
+		//JLabel d10=new JLabel("");
 		JLabel f1=new JLabel("");
 		JButton f2=new JButton("1000");
+		f2.addActionListener(this);
 		JButton f3=new JButton("3000");
+		f3.addActionListener(this);
 		JButton f4=new JButton("5000");
+		f4.addActionListener(this);
 		JButton f5=new JButton("4000");
+		f5.addActionListener(this);
 		JButton f6=new JButton("1000");
+		f6.addActionListener(this);
 		JButton f7=new JButton("6000");
+		f7.addActionListener(this);
 		JButton f8=new JButton("10000");
-		JLabel f9=new JLabel("");
-		JLabel f10=new JLabel("");
+		f8.addActionListener(this);
+		//JLabel f9=new JLabel("");
+		//JLabel f10=new JLabel("");
 		
 		graphics.add(a1);
 		graphics.add(a2);
@@ -92,8 +127,8 @@ public class Shop extends JFrame{
 		graphics.add(a6);
 		graphics.add(a7);
 		graphics.add(a8);
-		graphics.add(a9);
-		graphics.add(a10);	
+		//graphics.add(a9);
+		//graphics.add(a10);	
 		graphics.add(b1);
 		graphics.add(b2);
 		graphics.add(b3);
@@ -102,8 +137,8 @@ public class Shop extends JFrame{
 		graphics.add(b6);
 		graphics.add(b7);
 		graphics.add(b8);
-		graphics.add(b9);
-		graphics.add(b10);
+		//graphics.add(b9);
+		//graphics.add(b10);
 		graphics.add(c1);
 		graphics.add(c2);
 		graphics.add(c3);
@@ -112,8 +147,8 @@ public class Shop extends JFrame{
 		graphics.add(c6);
 		graphics.add(c7);
 		graphics.add(c8);
-		graphics.add(c9);
-		graphics.add(c10);
+		//graphics.add(c9);
+		//graphics.add(c10);
 		graphics.add(d1);
 		graphics.add(d2);
 		graphics.add(d3);
@@ -122,8 +157,8 @@ public class Shop extends JFrame{
 		graphics.add(d6);
 		graphics.add(d7);
 		graphics.add(d8);
-		graphics.add(d9);
-		graphics.add(d10);
+		//graphics.add(d9);
+		//graphics.add(d10);
 		graphics.add(e1);
 		graphics.add(e2);
 		graphics.add(e3);
@@ -132,8 +167,8 @@ public class Shop extends JFrame{
 		graphics.add(e6);
 		graphics.add(e7);
 		graphics.add(e8);
-		graphics.add(e9);
-		graphics.add(e10);
+		//graphics.add(e9);
+		//graphics.add(e10);
 		graphics.add(f1);
 		graphics.add(f2);
 		graphics.add(f3);
@@ -142,17 +177,26 @@ public class Shop extends JFrame{
 		graphics.add(f6);
 		graphics.add(f7);
 		graphics.add(f8);
-		graphics.add(f9);
-		graphics.add(f10);
+		//graphics.add(f9);
+		//graphics.add(f10);
 		graphics.setVisible(true);
 	    setBackground(Color.WHITE); //Doesnt do anything... REEEEE
 	    add(graphics, BorderLayout.CENTER);
 	    setVisible(true);
-	    //repaint();
 	}
-	
-	public static void main(String[] args)
-	{
-		Shop shop = new Shop();
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		String s=e.getSource().toString();
+		String t=s.substring(s.indexOf("text=")+5,s.indexOf(',', s.indexOf("text=")));
+		boolean success=game.spend(Integer.parseInt(t));
+		if(!success) {
+			JOptionPane pane = new JOptionPane("You do not have enough currency for this purchase.");
+			JDialog d = pane.createDialog(new JFrame(), "Error");
+			d.setLocation((int)(Math.random()*1200),(int)(Math.random()*600));
+			d.setVisible(true);
+		}
+		b8.setText(String.valueOf(game.getCurrency()));
 	}
 }

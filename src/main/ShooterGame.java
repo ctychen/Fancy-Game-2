@@ -622,7 +622,7 @@ public class ShooterGame {
 		return waveDone;
 	}
 	public boolean spend(int amt) {
-		if(amt>currency)
+		if(amt<currency)
 		{
 			currency-=amt;
 			return true;
