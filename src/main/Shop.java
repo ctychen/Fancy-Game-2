@@ -31,7 +31,7 @@ public class Shop extends JFrame implements ActionListener{
 		game=g;
 		graphics = new JPanel(new GridLayout(6,8,10,10));
 		
-		JLabel a1=new JLabel("Upgrade Stats:");
+		JLabel a1=new JLabel("Upgrades:");
 		JLabel a2=new JLabel("Level 2");
 		JLabel a3=new JLabel("Level 3");
 		JLabel a4=new JLabel("Level 4");
@@ -198,5 +198,80 @@ public class Shop extends JFrame implements ActionListener{
 			d.setVisible(true);
 		}
 		b8.setText(String.valueOf(game.getCurrency()));
+		System.out.println(s);
+		String sourcex = s.substring(s.indexOf(',')+1,s.indexOf(',',s.indexOf(',')+1));
+		int x=Integer.parseInt(sourcex);
+		String sourcey = s.substring(s.indexOf(',',s.indexOf(',')+1)+1,s.indexOf(',',s.indexOf(',',s.indexOf(',')+1)+1));
+		int y=Integer.parseInt(sourcey);
+		if(y==79)
+		{
+			if(game.getShip().hpLvl*79+1<x)
+			{
+				game.addCurrency(Integer.parseInt(t));
+				JOptionPane pane = new JOptionPane("You must purchase lower level upgrades first.");
+				JDialog d = pane.createDialog(new JFrame(), "Error");
+				d.setLocation((int)(Math.random()*1200),(int)(Math.random()*600));
+				d.setVisible(true);
+
+			}
+			else if(game.getShip().hpLvl*79+1>x)
+			{			
+				game.addCurrency(Integer.parseInt(t));
+				JOptionPane pane = new JOptionPane("You have already purchased this upgrade.");
+				JDialog d = pane.createDialog(new JFrame(), "Error");
+				d.setLocation((int)(Math.random()*1200),(int)(Math.random()*600));
+				d.setVisible(true);
+			}
+			else
+			{
+				game.getShip().upgradeHP();
+			}
+		}
+		else if(y==157)
+		{
+			if(game.getShip().atkLvl*79+1<x)
+			{
+				game.addCurrency(Integer.parseInt(t));
+				JOptionPane pane = new JOptionPane("You must purchase lower level upgrades first.");
+				JDialog d = pane.createDialog(new JFrame(), "Error");
+				d.setLocation((int)(Math.random()*1200),(int)(Math.random()*600));
+				d.setVisible(true);
+			}
+			else if(game.getShip().atkLvl*79+1>x)
+			{			
+				game.addCurrency(Integer.parseInt(t));
+				JOptionPane pane = new JOptionPane("You have already purchased this upgrade.");
+				JDialog d = pane.createDialog(new JFrame(), "Error");
+				d.setLocation((int)(Math.random()*1200),(int)(Math.random()*600));
+				d.setVisible(true);			
+			}
+			else
+			{
+				game.getShip().upgradeAtk();
+			}
+		}
+		else if(y==235) 
+		{
+			if(game.getShip().defLvl*79+1<x)
+			{
+				game.addCurrency(Integer.parseInt(t));
+				JOptionPane pane = new JOptionPane("You must purchase lower level upgrades first.");
+				JDialog d = pane.createDialog(new JFrame(), "Error");
+				d.setLocation((int)(Math.random()*1200),(int)(Math.random()*600));
+				d.setVisible(true);
+			}
+			else if(game.getShip().defLvl*79+1>x)
+			{			
+				game.addCurrency(Integer.parseInt(t));
+				JOptionPane pane = new JOptionPane("You have already purchased this upgrade.");
+				JDialog d = pane.createDialog(new JFrame(), "Error");
+				d.setLocation((int)(Math.random()*1200),(int)(Math.random()*600));
+				d.setVisible(true);
+			}
+			else
+			{
+				game.getShip().upgradeDef();
+			}
+		}
 	}
 }

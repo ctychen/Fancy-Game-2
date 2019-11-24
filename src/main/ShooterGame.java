@@ -249,16 +249,19 @@ public class ShooterGame {
 			Enemy enemy = (enemies.get(i));
 			if ((enemy.contains(ship.x, ship.y) || enemy.contains(ship.x - 10, ship.y + 30)
 					|| enemy.contains(ship.x + 10, ship.y + 30)) && ship.getHP() > 0&&enemy.getHP()>0) {
-
-				enemy.explode();
 				if(ship.shieldHP>0)
 				{
 					ship.shieldHP-=5;
+				}
+				else if(enemy.getClass().toString().equals("class enemies.Ninja"))
+				{
+					ship.hp-=enemy.hp/2;
 				}
 				else
 				{
 				ship.explode();
 				}
+				enemy.explode();
 			}
 		}
 		for (int i = 0; i < obstacles.size(); i++) {
@@ -542,11 +545,11 @@ public class ShooterGame {
 			{
 				if(powerUps.get(i).getType()==0)
 				{
-					if(ship.getHP()<9)
+					if(ship.getHP()<ship.maxHP-1)
 					{
 					ship.hp+=2;
 					}
-					else if(ship.getHP()==9)
+					else if(ship.getHP()==ship.maxHP-1)
 					{
 					ship.hp+=1;
 					}
@@ -637,5 +640,11 @@ public class ShooterGame {
 	}
 	public int getCurrency() {
 		return currency;
+	}
+	public void addCurrency(int amt) {
+		currency+=amt;
+	}
+	public Player getShip() {
+		return ship;
 	}
 }

@@ -12,7 +12,7 @@ import javax.swing.JFrame;
 public class Shooter extends Polygon{
 //Fields:
 	protected int x,y;
-	protected int hp;
+	protected int hp, maxHP;
 	int atk;
 	int def;
 	boolean blownUp;

@@ -10,6 +10,7 @@ public class Player extends Shooter{
 	private boolean tripleShot,doubleShot,rapidShot,fastMovement;
 	private int tsCount,dsCount,rsCount,fmCount;
 	int shieldHP;
+	int atkLvl,defLvl,hpLvl;
 	//Constructor:
 	public Player()
 	{
@@ -23,6 +24,9 @@ public class Player extends Shooter{
 		//super.addPoint(x-8, y+20);
 		super.addPoint(x-5, y+20);
 		shieldHP=0;
+		atkLvl=1;
+		defLvl=1;
+		hpLvl=1;
 	}
 //Checks powerUps
 	public boolean tsCheck()
@@ -142,5 +146,41 @@ public class Player extends Shooter{
 	public boolean fmCheck()
 	{
 		return fastMovement;
+	}
+	public void upgradeHP()
+	{
+		hpLvl++;
+		if(hpLvl<=5)
+		{
+			maxHP+=10;
+			hp+=10;
+		}
+		else
+		{
+			maxHP+=20;
+			hp+=20;
+		}
+	}
+	public void upgradeAtk() {
+		atkLvl++;
+		if(atkLvl<=5)
+		{
+			atk+=5;
+		}
+		else
+		{
+			atk+=10;
+		}
+	}
+	public void upgradeDef() {
+		defLvl++;
+		if(defLvl<=5)
+		{
+			def+=4;
+		}
+		else
+		{
+			def+=8;
+		}
 	}
 }
