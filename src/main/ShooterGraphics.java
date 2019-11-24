@@ -150,6 +150,10 @@ public class ShooterGraphics extends JPanel implements ActionListener, KeyListen
 					if (paused) {
 						paused = false;
 						game.nextWave();
+						if(ship.maxHP!=healthBar.max)
+						{
+							healthBar.setMax(ship.maxHP);
+						}
 					}
 				}
 				if (e.getKeyCode() == KeyboardInput.SPACE) {
@@ -651,7 +655,7 @@ int degrees=45 - (int)(45 * Math.cos(0.016* Math.PI * time));
 	
 	public void reinit() {
 		booms = new ArrayList<Explosion>();
-		healthBar = new ProgressBar(10, 100, 10, 20, 20, 5, Color.ORANGE, Color.BLACK);
+		healthBar = new ProgressBar(20, 100, 10, 20, 20, 5, Color.ORANGE, Color.BLACK);
 		this.setLayout(null);
 		hpLabel= new JLabel("HP re m a i n i n g:");
 		hpLabel.setLocation(20, 3);

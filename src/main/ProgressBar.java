@@ -55,6 +55,9 @@ public class ProgressBar extends Component{
 		if (health < 0) health = 0;
 		else if (health > max) health = max;
 	}
+	public void setMax(int health) {
+		max=health;
+	}
 	//draws it(duh?)
 	public void draw (Graphics g)
 	{

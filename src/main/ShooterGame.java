@@ -551,13 +551,13 @@ public class ShooterGame {
 			{
 				if(powerUps.get(i).getType()==0)
 				{
-					if(ship.getHP()<ship.maxHP-1)
+					if(ship.getHP()<ship.maxHP*4/5)
 					{
-					ship.hp+=2;
+					ship.hp+=ship.maxHP/5;
 					}
-					else if(ship.getHP()==ship.maxHP-1)
+					else
 					{
-					ship.hp+=1;
+					ship.hp=ship.maxHP;
 					}
 				}
 				else if(powerUps.get(i).getType()==2)
