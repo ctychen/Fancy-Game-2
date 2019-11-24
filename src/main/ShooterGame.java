@@ -166,21 +166,28 @@ public class ShooterGame {
 	// same, but for enemy projectiles, also handles if it hits the player
 	public void epsUpdate() {
 		for (int i = 0; i < enemyProjectiles.size(); i++) {
+			boolean laser = false;
 			if (enemyProjectiles.get(i).getClass().toString().equals("class projectiles.Laser")) {
+				laser = true;
 				if (Math.abs(ship.x-enemyProjectiles.get(i).getX()) < 5) {
 					if(ship.shieldHP>0)
 					{
 						(enemyProjectiles.get(i)).collide();
 						ship.shieldHP--;
+						enemyProjectiles.remove(i);
+						laser = true;
 					}
 					else
 					{
 						(enemyProjectiles.get(i)).collide();
 						ship.damage(enemyProjectiles.get(i).getPower(),ship.def);
+						enemyProjectiles.remove(i);
+						laser = true;
 					}
+					//System.out.println("Laser hit");
 				}
 			}
-			if (ship.contains(enemyProjectiles.get(i).getX(), enemyProjectiles.get(i).getY()) && ship.getHP() > 0) {
+			else if (ship.contains(enemyProjectiles.get(i).getX(), enemyProjectiles.get(i).getY()) && ship.getHP() > 0) {
 				if(ship.shieldHP>0)
 				{
 					(enemyProjectiles.get(i)).collide();
@@ -192,9 +199,12 @@ public class ShooterGame {
 					ship.damage(enemyProjectiles.get(i).getPower(),ship.def);
 				}
 			}
-			if (enemyProjectiles.get(i).collisionStatus()||enemyProjectiles.get(i).getY()>550) {
-				enemyProjectiles.remove(i);
-				i--;
+			if (!laser && enemyProjectiles.size() > i) {
+				if (enemyProjectiles.get(i).collisionStatus()||enemyProjectiles.get(i).getY()>550) {
+					//System.out.println("laser="+laser);
+					enemyProjectiles.remove(i);
+					i--;
+				}
 			}
 
 		}
