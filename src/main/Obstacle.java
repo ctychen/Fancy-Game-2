@@ -37,11 +37,11 @@ public class Obstacle extends Polygon{
 		case 1://missile
 			super.addPoint(x-25, y-50);
 			super.addPoint(x+25, y-50);
-			super.addPoint(x+18,y-40);
-			super.addPoint(x+18,y+20);
-			super.addPoint(x,y+30);
-			super.addPoint(x-18, y+20);
-			super.addPoint(x-18, y-40);
+			super.addPoint(x+9,y-40);
+			super.addPoint(x+9,y+50);
+			super.addPoint(x,y+60);
+			super.addPoint(x-9, y+50);
+			super.addPoint(x-9, y-40);
 			hp=3;
 			dxdt=0;
 			break;
