@@ -275,10 +275,10 @@ public class Shop extends JFrame implements ActionListener{
 		{
 			int temp=(x-1)/79;
 			System.out.println(temp);
-			PowerUp p=new PowerUp(1);
+			PowerUp p=new PowerUp(0);
 			if(temp==1)
 			{
-				
+				p=new PowerUp(0);
 			}
 			else if(temp==2) 
 			{

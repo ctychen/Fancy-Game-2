@@ -46,8 +46,11 @@ public class Special extends main.Enemy {
 	//Creates and returns a projectile
 	public Projectile shoot()
 	{
-		shootCount=30;
-		return new projectiles.Laser(x,y,-500,atk, 1);
+		if (hp > 0) {
+			shootCount=60;
+			return new projectiles.Laser(x,y,-500,atk, 1);
+		} else
+			return new Projectile(x,y,-500,atk);
 	}
 	
 	//determines enemy movement
