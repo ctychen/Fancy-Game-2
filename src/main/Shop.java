@@ -273,5 +273,54 @@ public class Shop extends JFrame implements ActionListener{
 				game.getShip().upgradeDef();
 			}
 		}
+		else if(y==391)
+		{
+			int temp=(x-1)/6;
+			PowerUp p=new PowerUp(0);
+			if(temp==1)
+			{
+				
+			}
+			else if(temp==2) 
+			{
+				p=new PowerUp(1);
+			}
+			else if(temp==3) 
+			{
+				p=new PowerUp(2);
+			}
+			else if(temp==4) 
+			{
+				p=new PowerUp(5);
+			}
+			else if(temp==5) 
+			{
+				p=new PowerUp(6);
+			}
+			else if(temp==6) 
+			{
+				p=new PowerUp(7);
+			}
+			else if(temp==7) 
+			{
+				p=new PowerUp(8);
+			}
+				
+			if(!game.getHotbar().addPowerUp(p))
+			{
+				game.addCurrency(Integer.parseInt(t));
+				JOptionPane pane = new JOptionPane("Your power up hotbar is full.");
+				JDialog d = pane.createDialog(new JFrame(), "Error");
+				d.setLocation((int)(Math.random()*1200),(int)(Math.random()*600));
+				d.setVisible(true);
+			}
+			else
+			{
+				JOptionPane pane = new JOptionPane("Purchase successful. You have "+game.getHotbar().spotsLeft()+" spots left.");
+				JDialog d = pane.createDialog(new JFrame(), "Error");
+				d.setLocation((int)(Math.random()*1200),(int)(Math.random()*600));
+				d.setVisible(true);
+			}
+		}
 	}
 }

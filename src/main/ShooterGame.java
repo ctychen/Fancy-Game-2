@@ -38,6 +38,7 @@ public class ShooterGame {
 	private boolean waveDone;
 	private Wave currentWave;
 	private int enemyNum,obstacleCt,obsNum;
+	private Hotbar hotbar;
 	// Constructor:
 	public ShooterGame(int t, Player s, int w, int h) {
 		time = t;
@@ -56,6 +57,7 @@ public class ShooterGame {
 		powerUps=new ArrayList<PowerUp>();
 		Enemy e=new Enemy(300,60,30);
 		currentWave=new Wave(10,5,e, waveNum);
+		hotbar=new Hotbar();
 	}
 
 	// Returns 0 for alive, 1 for exploding, 2 for dead
@@ -273,10 +275,14 @@ public class ShooterGame {
 				{
 					ship.shieldHP-=5;
 				}
+				else if(obstacle.getType()==1)
+				{
+					ship.explode();
+				}
 				else
 				{
-				ship.explode();
-				}		
+					ship.hp-=ship.maxHP/2;
+				}
 			} 
 		}
 
@@ -607,6 +613,55 @@ public class ShooterGame {
 			}
 		}
 	}
+	//method to do stuff for powerups in hotbar
+	public void applyPowerUp(int type) {
+		if(type==0)
+		{
+			if(ship.getHP()<ship.maxHP-1)
+			{
+			ship.hp+=2;
+			}
+			else if(ship.getHP()==ship.maxHP-1)
+			{
+			ship.hp+=1;
+			}
+		}
+		else if(type==2)
+		{
+			ship.setTS();
+			ship.startTSCount();
+		}
+		else if(type==1)
+		{
+			ship.setDS();
+			ship.startDSCount();
+		}
+		else if(type==5)
+		{
+			ship.setRS();
+			ship.startRSCount();
+		}
+		else if(type==6)
+		{
+			ship.setFM();
+			ship.startFMCount();
+		}
+		else if(type==7)
+		{
+			ship.shieldHP=10;
+		}
+		else if(type==8)
+		{
+			for(Enemy e: enemies) {
+				e.explode();
+			}
+			for(Obstacle o: obstacles)
+			{
+				o.explode();
+			}
+			enemyProjectiles = new ArrayList<Projectile>();
+		}
+	}
 	//accessor for powerUps
 	public ArrayList<PowerUp> getPowerUps()
 	{
@@ -646,5 +701,8 @@ public class ShooterGame {
 	}
 	public Player getShip() {
 		return ship;
+	}
+	public Hotbar getHotbar() {
+		return hotbar;
 	}
 }

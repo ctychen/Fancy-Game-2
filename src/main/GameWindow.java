@@ -29,7 +29,7 @@ public class GameWindow extends JFrame{
 		GameWindow window = new GameWindow();
 		window.setBounds(0, 0, 630, 490);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		window.setResizable(false);
+		window.setResizable(true);
 		window.setVisible(true);
 	}
 

@@ -23,6 +23,13 @@ public class PowerUp {
 		type=(int)(Math.random()*9);
 		
 	}
+	public PowerUp(int type)
+	{
+		x=0;
+		y=0;
+		type=(int)(Math.random()*9);
+		
+	}
 	//moves the power up
 	public void move()
 	{

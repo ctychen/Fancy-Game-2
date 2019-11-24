@@ -60,7 +60,7 @@ public class ShooterGraphics extends JPanel implements ActionListener, KeyListen
 	public boolean fKey = false;
 	boolean iKey = false;
 	public static boolean gameStart = false;
-	boolean key1 = false, key2 = false, key3 = false,gKey=false;;
+	boolean key1 = false, key2 = false, key3 = false,key4=false,key5=false,gKey=false;
 	public static boolean choiceMade = false;
 	int loops = 0;
 	JLabel hpLabel;
@@ -219,16 +219,21 @@ public class ShooterGraphics extends JPanel implements ActionListener, KeyListen
 			if (key1 == true && choiceMade == false) {
 				game.setWaveNum(1);
 				choiceMade = true;
+				key1=false;
 			} else if (key2 == true && choiceMade == false) {
 				game.setWaveNum(2);
 				choiceMade = true;
+				key2=false;
 			} else if (key3 == true && choiceMade == false) {
 				game.setWaveNum(3);
 				choiceMade = true;
+				key3=false;
 			} else if (gKey == true && choiceMade == false) {
 				game.setWaveNum(27);
 				choiceMade = true;
+				key4=false;
 			}
+			
 		}
 		if (game.getWaveStatus()) {
 			paused = true;
@@ -244,6 +249,22 @@ public class ShooterGraphics extends JPanel implements ActionListener, KeyListen
 			panel.update(ship.getHP(), game.score, game.getWaveNum(),game.getCurrency());
 		}
 		else if (game.getWaveNum() >= 1 && gameStart == true) {
+			if (key1 == true&&choiceMade) {
+				game.getHotbar().usePowerUp(game,0);
+				key1=false;
+			} else if (key2 == true&&choiceMade) {
+				game.getHotbar().usePowerUp(game,1);
+				key2=false;
+			} else if (key3 == true&&choiceMade) {
+				game.getHotbar().usePowerUp(game,2);
+				key3=false;
+			} else if (key4 == true&&choiceMade) {
+				game.getHotbar().usePowerUp(game,3);
+				key4=false;
+			}else if (key4 == true&&choiceMade) {
+				game.getHotbar().usePowerUp(game,4);
+				key5=false;
+			}
 			if(game.getWaveNum()<26)//for lower getWaveNum() background
 			{
 				Color bgc = new Color((30*game.getWaveNum())%255, (255-10*game.getWaveNum())%255, 100);
@@ -474,6 +495,7 @@ int degrees=45 - (int)(45 * Math.cos(0.016* Math.PI * time));
 				game.playerShot();
 			}
 			game.movePowerUps();
+			game.getHotbar().draw(g);
 			g.setColor(Color.BLACK);
 			//draws Ship
 			if (game.getShipStatus() == 0) {

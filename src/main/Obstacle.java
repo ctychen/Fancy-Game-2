@@ -11,6 +11,7 @@ public class Obstacle extends Polygon{
 	 int x,y,dxdt,dydt;
 	private int hp;
 	private int count;
+	private int type;
 	//private SoundManager sound = new SoundManager();
 	//private Polygon super;
 	boolean blownUp = false;
@@ -59,6 +60,7 @@ public class Obstacle extends Polygon{
 			break;
 			
 		}
+		this.type=type;
 	}
 	//moves it
 	public void move()
@@ -95,5 +97,8 @@ public class Obstacle extends Polygon{
 	public void incrementCount()
 	{
 		count++;
+	}
+	public int getType() {
+		return type;
 	}
 }

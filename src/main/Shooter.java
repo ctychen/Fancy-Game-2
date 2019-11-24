@@ -31,6 +31,7 @@ public class Shooter extends Polygon{
 		blownUp=false;
 		explosionCount=0;
 		effects=new int[3];
+		maxHP=10;
 	}
 	//if you want a specific hp
 	public Shooter(int xCoord,int yCoord, int k)
@@ -42,6 +43,7 @@ public class Shooter extends Polygon{
 		y=yCoord;
 		blownUp=false;
 		explosionCount=0;
+		maxHP=k;
 		
 	}
 	public Shooter(int xCoord, int yCoord, int k, int attack, int defense) {
@@ -52,6 +54,7 @@ public class Shooter extends Polygon{
 		y=yCoord;
 		blownUp=false;
 		explosionCount=0;
+		maxHP=k;
 	}
 //	public void draw(Graphics g)
 //	{
