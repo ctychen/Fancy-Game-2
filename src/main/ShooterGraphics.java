@@ -46,6 +46,8 @@ public class ShooterGraphics extends JPanel implements ActionListener, KeyListen
 	private Image lg = new ImageIcon("LowGraphics.png").getImage();
 	private Image rg = new ImageIcon("reducedGraphics.png").getImage();
 	private Image critImg = new ImageIcon("crit.png").getImage();
+	private Image bullet = new ImageIcon("bulleti.png").getImage();
+	private Image ebullet = new ImageIcon("ebulleti.png").getImage();
 	Timer clock;
 	int timesRestarted = 0;
 	SidePanel panel;
@@ -539,13 +541,19 @@ int degrees=45 - (int)(45 * Math.cos(0.016* Math.PI * time));
 			g.setColor(Color.BLUE);
 			for (int i = 0; i < ppList.size(); i++) {
 
-				g.fillPolygon(ppList.get(i));
+				if (lowGraphics > 0)
+					g.fillPolygon(ppList.get(i));
+				else
+					g.drawImage(bullet, ppList.get(i).xC - 308, ppList.get(i).yC - 220, null);
 			}
 			g.setColor(Color.RED);
 			for (int i = 0; i < epList.size(); i++) {
 				if(ship.getHP()>0)
 				{
-					g.fillPolygon(epList.get(i));
+					if (lowGraphics > 0)
+						g.fillPolygon(epList.get(i));
+					else
+						g.drawImage(ebullet, epList.get(i).xC - 300, epList.get(i).yC - 220, null);
 				}
 			}
 			//draws powerUps
