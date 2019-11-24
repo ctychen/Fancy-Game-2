@@ -78,6 +78,7 @@ public class Wave {
 		}
 		this.maxEnemies=maxEnemies;
 		this.obsDelay=obsDelay;
+		boss=bossEnemy;
 		//this.boss = new enemies.Boss1(15+(int)(Math.random()*600),70-(int)(Math.random()*20),60+waveNum);
 	}
 	public Wave(int waveNum) {

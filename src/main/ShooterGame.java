@@ -55,7 +55,6 @@ public class ShooterGame {
 		playerProjectiles = new ArrayList<Projectile>();
 		enemyProjectiles = new ArrayList<Projectile>();
 		powerUps=new ArrayList<PowerUp>();
-		Enemy e=new Enemy(300,60,30);
 		currentWave=new Wave(1);
 		hotbar=new Hotbar();
 	}
