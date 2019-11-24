@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.geom.Point2D;
 import java.awt.image.ImageObserver;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -48,6 +49,7 @@ public class ShooterGraphics extends JPanel implements ActionListener, KeyListen
 	private Image critImg = new ImageIcon("crit.png").getImage();
 	private Image bullet = new ImageIcon("bulleti.png").getImage();
 	private Image ebullet = new ImageIcon("ebulleti.png").getImage();
+	private ArrayList<Point2D> stars = new ArrayList<Point2D>();
 	Timer clock;
 	int timesRestarted = 0;
 	SidePanel panel;
@@ -245,8 +247,39 @@ public class ShooterGraphics extends JPanel implements ActionListener, KeyListen
 			if(game.getWaveNum()<26)//for lower getWaveNum() background
 			{
 				Color bgc = new Color((30*game.getWaveNum())%255, (255-10*game.getWaveNum())%255, 100);
+				Color bgcm;
 				g.setColor(bgc);
 				g.fillRect(0, 0, 1000, 500);
+				
+				if (lowGraphics < 2) {
+					for (int i = 0; i < 100; i++) {
+						int y = i + (int)( this.getHeight()*(((float)time%100)/75)-this.getHeight()*0.2 );
+						if (i < 50) {
+							bgcm = new Color(Math.min(bgc.getRed()+i, 255), Math.min(bgc.getGreen()+i, 255), Math.min(bgc.getBlue()+i, 255));
+						}
+						else {
+							bgcm = new Color(Math.min(255, Math.max(bgc.getRed()+100-i, bgc.getRed())), Math.min(255, Math.max(bgc.getGreen()+100-i, bgc.getGreen())), Math.min(255, Math.max(bgc.getBlue()+100-i, bgc.getBlue())));
+						}
+						g.setColor(bgcm);
+						g.fillRect(0, y, this.getWidth(), 1);
+						
+					}
+				}
+				
+				if (lowGraphics < 1) {
+					g.setColor(new Color(Math.min(255, 350-bgc.getRed()), Math.min(255, 350-bgc.getGreen()), Math.min(255, 350-bgc.getBlue())));
+					if ((int)(Math.random()*5) == 0) {
+						stars.add(new Point2D.Float((int)(Math.random()*this.getWidth()), -1));
+					}
+					for (int i = 0; i < stars.size(); i++) {
+						stars.get(i).setLocation(stars.get(i).getX(), stars.get(i).getY()+2);
+						int s = (int)(Math.random()*3)+1;
+						g.fillRect((int)stars.get(i).getX(), (int)stars.get(i).getY(), s, s);
+						if (stars.get(i).getY() > this.getHeight())
+							stars.remove(i);
+					}
+				}
+				
 			}
 			else//for the rainbow background when getWaveNum() gets high enough
 			{

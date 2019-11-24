@@ -24,8 +24,6 @@ public class Special extends main.Enemy {
 		image = ShooterGraphics.specialImage;
 	}
 	
-	
-	
 	public void shapeMe() {
 		super.addPoint(x, y);//
 		super.addPoint(x-4, y);//
