@@ -203,7 +203,7 @@ public class Shop extends JFrame implements ActionListener{
 		int y=Integer.parseInt(sourcey);
 		if(Math.abs(y-81) < 10)
 		{
-			if(game.getShip().hpLvl*79+1<x)
+			if(game.getShip().hpLvl*(79+1)<x)
 			{
 				game.addCurrency(Integer.parseInt(t));
 				JOptionPane pane = new JOptionPane("You must purchase lower level upgrades first.");
@@ -212,7 +212,7 @@ public class Shop extends JFrame implements ActionListener{
 				d.setVisible(true);
 
 			}
-			else if(game.getShip().hpLvl*79+1>x)
+			else if(game.getShip().hpLvl*(79+1)>x)
 			{			
 				game.addCurrency(Integer.parseInt(t));
 				JOptionPane pane = new JOptionPane("You have already purchased this upgrade.");
@@ -227,7 +227,7 @@ public class Shop extends JFrame implements ActionListener{
 		}
 		else if(Math.abs(y-160) < 10)
 		{
-			if(game.getShip().atkLvl*79+1<x)
+			if(game.getShip().atkLvl*(79+1)<x)
 			{
 				game.addCurrency(Integer.parseInt(t));
 				JOptionPane pane = new JOptionPane("You must purchase lower level upgrades first.");
@@ -235,7 +235,7 @@ public class Shop extends JFrame implements ActionListener{
 				d.setLocation((int)(Math.random()*1200),(int)(Math.random()*600));
 				d.setVisible(true);
 			}
-			else if(game.getShip().atkLvl*79+1>x)
+			else if(game.getShip().atkLvl*(79+1)>x)
 			{			
 				game.addCurrency(Integer.parseInt(t));
 				JOptionPane pane = new JOptionPane("You have already purchased this upgrade.");
@@ -250,7 +250,7 @@ public class Shop extends JFrame implements ActionListener{
 		}
 		else if(Math.abs(y-239) < 10) 
 		{
-			if(game.getShip().defLvl*79+1<x)
+			if(game.getShip().defLvl*(79+1)<x)
 			{
 				game.addCurrency(Integer.parseInt(t));
 				JOptionPane pane = new JOptionPane("You must purchase lower level upgrades first.");
@@ -258,7 +258,7 @@ public class Shop extends JFrame implements ActionListener{
 				d.setLocation((int)(Math.random()*1200),(int)(Math.random()*600));
 				d.setVisible(true);
 			}
-			else if(game.getShip().defLvl*79+1>x)
+			else if(game.getShip().defLvl*(79+1)>x)
 			{			
 				game.addCurrency(Integer.parseInt(t));
 				JOptionPane pane = new JOptionPane("You have already purchased this upgrade.");

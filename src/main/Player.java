@@ -48,7 +48,10 @@ public class Player extends Shooter{
 //returns a projectile
 	public Projectile shoot(int xC)
 	{
-		return new Projectile(xC,y,3,atk);
+		if (laserShot && lsCount > 0)
+			return new projectiles.Laser(xC, y, 500, atk);
+		else
+			return new Projectile(xC,y,3,atk);
 	}
 	public Projectile shootLaser(int xC) {
 		return new projectiles.Laser(xC, y, 500, atk);
