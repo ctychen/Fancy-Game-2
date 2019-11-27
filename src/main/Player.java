@@ -181,8 +181,8 @@ public class Player extends Shooter{
 		}
 		else
 		{
-			maxHP+=20;
-			hp+=20;
+			maxHP+=10+2*hpLvl;
+			hp+=10+2*hpLvl;
 		}
 	}
 	public void upgradeAtk() {
@@ -193,7 +193,7 @@ public class Player extends Shooter{
 		}
 		else
 		{
-			atk+=10;
+			atk+=5+atkLvl;
 		}
 	}
 	public void upgradeDef() {
