@@ -560,6 +560,7 @@ public class ShooterGame {
 		for (int i = 0; i < playerProjectiles.size(); i++) {
 			// System.out.println("i:"+i);
 			Projectile p = playerProjectiles.get(i);// (Projectile)(Array.get(playerProjectiles, i));
+			
 			if (p.collisionStatus()) {
 				playerProjectiles.remove(i);
 				i--;
@@ -575,6 +576,14 @@ public class ShooterGame {
 	//utility for ppoUpdate
 	public boolean hitObs(Projectile p) {
 		for (int i = 0; i < obstacles.size(); i++) {
+			if (p.getClass().toString().equals("class projectiles.Laser")) {
+				if (Math.abs(obstacles.get(i).x-p.getX()) < 5) {
+					
+						obstacles.get(i).damage();
+						p.collide();
+						return true;
+				}
+			}
 			if (obstacles.get(i).contains(p.getX(), p.getY()) && obstacles.get(i).getHP() > 0) {
 				// System.out.println(obstacles.get(i).getHP());
 				obstacles.get(i).damage();

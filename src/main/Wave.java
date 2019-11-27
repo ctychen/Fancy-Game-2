@@ -115,7 +115,14 @@ public class Wave {
 			{
 				bossEnemy=new enemies.Boss1(300+(int)((Math.random()-0.5)*500), 50+(int)((Math.random()-0.5)*50),5020*waveNum*7/5,12*waveNum*7/5,9*waveNum*7/5);
 			}
-			wave(e,10+2*waveNum,bossEnemy,(int)(10+2*Math.log(waveNum)),(int)(800/Math.log(waveNum)),12*waveNum*7/5,11*waveNum*4/5,8+waveNum*3/4);
+			if (Math.random() < 0.1) {
+				e[0] = 0;
+				e[1] = 0;
+				e[2] = 1;
+				wave(e, 100+8*waveNum, bossEnemy, 2, (int)(30/Math.log(waveNum)), 12*waveNum*7/5,11*waveNum*4/5,8+waveNum*3/4);
+			}
+			else
+				wave(e,10+2*waveNum,bossEnemy,(int)(10+2*Math.log(waveNum)),(int)(800/Math.log(waveNum)),12*waveNum*7/5,11*waveNum*4/5,8+waveNum*3/4);
 		}
 	}
 	public int getMaxEnemies() {
