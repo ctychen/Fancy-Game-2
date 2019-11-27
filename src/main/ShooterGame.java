@@ -169,7 +169,11 @@ public class ShooterGame {
 			boolean laser = false;
 			if (enemyProjectiles.get(i).getClass().toString().equals("class projectiles.Laser")) {
 				laser = true;
-				if (Math.abs(ship.x-enemyProjectiles.get(i).getX()) < 5) {
+				if (enemyProjectiles.get(i).getY()>550 || enemyProjectiles.get(i).collisionStatus()) {
+					enemyProjectiles.remove(i);
+					laser = true;
+				}
+				else if (Math.abs(ship.x-enemyProjectiles.get(i).getX()) < 5) {
 					if(ship.shieldHP>0)
 					{
 						(enemyProjectiles.get(i)).collide();

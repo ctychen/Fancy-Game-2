@@ -61,6 +61,11 @@ public class Laser extends main.Projectile {
 		this.lt = lt;
 	}
 	
+	public boolean collisionStatus()
+	{
+		return t > lt;
+	}
+	
 	//moves it("Wow Sherlock!")
 	public void move()
 	{
