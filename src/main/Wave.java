@@ -101,7 +101,7 @@ public class Wave {
 			break;
 		case 5:
 			int[] e = {17,5,3};
-			wave(e,20,new Enemy(300,50,20,12,9),10,500,12,11,8);
+			wave(e,20,new enemies.Boss1(300,50,20,12,9),10,500,12,11,8);
 			break;
 		}
 		if(waveNum>5) {
@@ -113,7 +113,7 @@ public class Wave {
 			}
 			else
 			{
-				bossEnemy=new enemies.Boss0(300+(int)((Math.random()-0.5)*500), 50+(int)((Math.random()-0.5)*50),5020*waveNum*7/5,12*waveNum*7/5,9*waveNum*7/5);
+				bossEnemy=new enemies.Boss1(300+(int)((Math.random()-0.5)*500), 50+(int)((Math.random()-0.5)*50),5020*waveNum*7/5,12*waveNum*7/5,9*waveNum*7/5);
 			}
 			wave(e,10+2*waveNum,bossEnemy,(int)(10+2*Math.log(waveNum)),(int)(800/Math.log(waveNum)),12*waveNum*7/5,11*waveNum*4/5,8+waveNum*3/4);
 		}
