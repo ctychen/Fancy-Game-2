@@ -20,8 +20,8 @@ public class PowerUp {
 	{
 		x=xCoord;
 		y=yCoord;
-		type=(int)(Math.random()*10);
-		
+		type=(int)(Math.random()*11);
+		//type = 10;
 		
 	}
 	public PowerUp(int type)
@@ -109,6 +109,13 @@ public class PowerUp {
 			g.setColor(Color.RED);
 			g.drawOval(x-2, y+8, 4, 4);
 			g.drawLine(x, y+8, x, y-8);
+		}
+		else if(type==10) {
+			g.setColor(Color.RED);
+			g.drawOval(x-8, y-8, 16, 16);
+			g.fillArc(x-8, y-8, 16, 16, 60, 60);
+			g.fillArc(x-8, y-8, 16, 16, 180, 60);
+			g.fillArc(x-8, y-8, 16, 16, 300, 60);
 		}
 	}
 	//returns x, y, and type

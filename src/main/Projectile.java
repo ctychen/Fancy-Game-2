@@ -12,7 +12,7 @@ public class Projectile extends Polygon{
 	public int xC,yC,v;//center coords and velocity
 	protected int power;
 	protected boolean spent;
-	protected int effect;
+	public int effect;
 //Constructor:
 	public Projectile(int x,int y, int k)
 	{

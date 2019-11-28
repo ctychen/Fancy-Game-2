@@ -83,6 +83,7 @@ public class ShooterGraphics extends JPanel implements ActionListener, KeyListen
 	public static Image explode8 =new ImageIcon("spicyexplosion.gif").getImage().getScaledInstance(200, 200, Image.SCALE_FAST);
 	public static Image explode9 =new ImageIcon("SuperFancyExplosion.gif").getImage().getScaledInstance(200, 200, Image.SCALE_FAST);
 	public static Image fastExplode  = new ImageIcon("goodExplosion.gif").getImage();
+	public static Image blueBoi =new ImageIcon("aei.png").getImage().getScaledInstance(240, 240, Image.SCALE_FAST);
 	
 	public static ArrayList<Explosion> booms;
 	
@@ -558,7 +559,7 @@ int degrees=45 - (int)(45 * Math.cos(0.016* Math.PI * time));
 			{
 				if (booms.get(i).getTimeAlive() < booms.get(i).getMaxTime()) booms.get(i).draw(g);
 				else booms.remove(i);
-				if (lowGraphics == 1 && booms.get(i).getTimeAlive() > 80) booms.remove(i);
+				if (lowGraphics == 1 && i < booms.size() && booms.get(i).getTimeAlive() > 80) booms.remove(i);
 			}
 			//draws enemies
 			for (int i = 0; i < eList.size(); i++) {
@@ -617,6 +618,8 @@ int degrees=45 - (int)(45 * Math.cos(0.016* Math.PI * time));
 
 				if (lowGraphics > 0 || ppList.get(i).getClass().toString().equals("class projectiles.Laser"))
 					g.fillPolygon(ppList.get(i));
+				else if (ppList.get(i).getClass().toString().equals("class projectiles.AreaDamage"))
+					g.drawImage(blueBoi, ppList.get(i).xC - 120, ppList.get(i).yC - 120, null);
 				else
 					g.drawImage(bullet, ppList.get(i).xC - 308, ppList.get(i).yC - 220, null);
 			}

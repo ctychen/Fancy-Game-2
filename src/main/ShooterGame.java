@@ -239,6 +239,11 @@ public class ShooterGame {
 
 	// handles player projectile collisions with enemy
 	public boolean hitEnemy(Projectile p) {
+		if (p.effect==1 && p.getY() < 40) {
+			Projectile q = new projectiles.AreaDamage(p.getX(), p.getY(), 80, ship.atk);
+			playerProjectiles.add(q);
+			p.collide();
+		}
 		for (int i = 0; i < enemies.size(); i++) {
 			if (p.getClass().toString().equals("class projectiles.Laser")) {
 				if (Math.abs(enemies.get(i).x-p.getX()) < 5) {
@@ -247,7 +252,19 @@ public class ShooterGame {
 					
 				}
 			}
+			else if (p.getClass().toString().equals("class projectiles.AreaDamage")) {
+				int dist = (int)Math.sqrt( Math.pow(p.getX()-enemies.get(i).x, 2) + Math.pow(p.getY()-enemies.get(i).y, 2) );
+				if (dist < 90) {
+					//System.out.println("BOOM");
+					enemies.get(i).damage(p.getPower(),enemies.get(i).def/2);
+				}
+			}
 			else if (enemies.get(i).contains(p.getX(), p.getY())) {
+				if (p.effect==1)
+				{
+					Projectile q = new projectiles.AreaDamage(p.getX(), p.getY(), 80, ship.atk);
+					playerProjectiles.add(q);
+				}
 				if(enemies.get(i).x-p.getX()<2&&enemies.get(i).x-p.getX()>-2)
 				{
 					enemies.get(i).explode();
@@ -376,6 +393,8 @@ public class ShooterGame {
 					playerProjectiles.add(ship.shootLaser(ship.x));
 					ship.decrementLSCount();
 				}
+				else if (ship.rlCheck())
+					ship.decrementRLCount();
 				ship.decrementRSCount();
 			}
 		}
@@ -406,6 +425,8 @@ public class ShooterGame {
 					playerProjectiles.add(ship.shootLaser(ship.x));
 					ship.decrementLSCount();
 				}
+				else if (ship.rlCheck())
+					ship.decrementRLCount();
 			}
 		}
 	}
@@ -584,8 +605,20 @@ public class ShooterGame {
 						return true;
 				}
 			}
+			else if (p.getClass().toString().equals("class projectiles.AreaDamage")) {
+				int dist = (int)Math.sqrt( Math.pow(p.getX()-obstacles.get(i).x, 2) + Math.pow(p.getY()-obstacles.get(i).y, 2) );
+				if (dist < 90) {
+					//System.out.println("BOOM");
+					obstacles.get(i).damage();
+				}
+			}
 			if (obstacles.get(i).contains(p.getX(), p.getY()) && obstacles.get(i).getHP() > 0) {
 				// System.out.println(obstacles.get(i).getHP());
+				if (p.effect==1)
+				{
+					Projectile q = new projectiles.AreaDamage(p.getX(), p.getY(), 80, ship.atk);
+					playerProjectiles.add(q);
+				}
 				obstacles.get(i).damage();
 				p.collide();
 				return true;
@@ -655,12 +688,20 @@ public class ShooterGame {
 					{
 						o.explode();
 					}
+					for (int j = 0; j < Math.random()*60+15; j++) {
+						ShooterGraphics.booms.add(new Explosion((int)(Math.random()*10), (int)(Math.random()*630), (int)(Math.random()*490)));
+					}
 					enemyProjectiles = new ArrayList<Projectile>();
 				}
 				else if(powerUps.get(i).getType()==9)
 				{
 					ship.setLS();
 					ship.startLSCount();
+				}
+				else if(powerUps.get(i).getType()==10)
+				{
+					ship.setRL();
+					ship.startRLCount();
 				}
 				powerUps.remove(i);
 				i--;

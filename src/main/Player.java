@@ -7,8 +7,8 @@ package main;
 public class Player extends Shooter{
 	//Fields:
 	//booleans and counts for different powerups
-	private boolean tripleShot,doubleShot,rapidShot,fastMovement, laserShot;
-	private int tsCount,dsCount,rsCount,fmCount,lsCount;
+	private boolean tripleShot,doubleShot,rapidShot,fastMovement, laserShot, rocketLauncher;
+	private int tsCount,dsCount,rsCount,fmCount,lsCount,rlCount;
 	int shieldHP;
 	int atkLvl,defLvl,hpLvl;
 	//Constructor:
@@ -45,10 +45,27 @@ public class Player extends Shooter{
 	{
 		return rapidShot;
 	}
+	public boolean rlCheck() {
+		if (rlCount <=0 )
+			rocketLauncher = false;
+		return rocketLauncher;
+	}
+	
+	public Projectile shoot() {
+		if (rocketLauncher && rlCount > 0)
+			return new projectiles.Yeeter(x, y, 3, atk);
+		else if (laserShot && lsCount > 0)
+			return new projectiles.Laser(x, y, 500, atk);
+		else
+			return super.shoot();
+	}
+	
 //returns a projectile
 	public Projectile shoot(int xC)
-	{
-		if (laserShot && lsCount > 0)
+	{	
+		if (rocketLauncher && rlCount > 0)
+			return new projectiles.Yeeter(xC, y, 3, atk);
+		else if (laserShot && lsCount > 0)
 			return new projectiles.Laser(xC, y, 500, atk);
 		else
 			return new Projectile(xC,y,3,atk);
@@ -69,6 +86,11 @@ public class Player extends Shooter{
 	{
 		laserShot=true;
 	}
+	public void setRL()
+	{
+		rocketLauncher = true;
+		startRLCount();
+	}
 	public void decrementTSCount()
 	{
 		tsCount--;
@@ -88,6 +110,14 @@ public class Player extends Shooter{
 	public void startLSCount()
 	{
 		lsCount=40;
+	}
+	public void startRLCount()
+	{
+		rlCount = 40;
+	}
+	public void decrementRLCount()
+	{
+		rlCount--;
 	}
 	public void decrementLSCount()
 	{
@@ -113,6 +143,14 @@ public class Player extends Shooter{
 		if(fmCount==0)
 		{
 			fastMovement=false;
+		}
+		if(lsCount==0)
+		{
+			laserShot=false;
+		}
+		if(rlCount==0)
+		{
+			rocketLauncher=false;
 		}
 	}
 //More powerUp stuff
