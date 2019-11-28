@@ -690,6 +690,8 @@ public class ShooterGame {
 					}
 					for (int j = 0; j < Math.random()*60+15; j++) {
 						ShooterGraphics.booms.add(new Explosion((int)(Math.random()*10), (int)(Math.random()*630), (int)(Math.random()*490)));
+						if (Math.random()<0.6)
+							playerProjectiles.add(new projectiles.AreaDamage((int)(Math.random()*630), (int)(Math.random()*490), 80, ship.atk/2));
 					}
 					enemyProjectiles = new ArrayList<Projectile>();
 				}
