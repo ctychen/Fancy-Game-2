@@ -16,8 +16,6 @@ Shooting an obstacle causes it to explode.
 The player could also die if it is hit by an enemy's bullet. 
 The player destroys enemies by hitting them. 
 
-![alt text](https://user-images.githubusercontent.com/50178083/104689542-8aa4eb80-56b7-11eb-9fea-bc40ede84174.png)
-
 Instructions:
 
 Run GameWindow.java to open the game. Press S to start immediately, or press i to see the instructions first.
